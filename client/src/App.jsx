@@ -1,67 +1,49 @@
-import React, { useState } from "react"
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useState, useEffect } from "react"
 import { Routes, Route, NavLink, useNavigate } from "react-router-dom"
 import HostPage from "./views/HostPage"
 import Welcome from "./views/Welcome"
 import Game from "./views/Game"
 import Lobby from "./views/Lobby"
 import GameOver from "./views/GameOver"
-import Calamari from "./assets/calamari.png"
-import { hostId } from "./utils/socket"
 
 function App({ socket }) {
   const [playerId, setPlayerId] = useState(null)
-  const [hostId, setHostId] = useState(null)
-  const [playerName, setPlayerName] = useState("")
-  const [eliminated, setEliminated] = useState(false)
-  const [hosting, setHosting] = useState(false)
-  const [roomId, setRoomId] = useState("")
-  const [players, setPlayers] = useState([
-    {
-      id: hostId,
-      name: "Player 001 (Host)",
-      score: 0,
-    },
-  ])
+  const [playerName, setPlayerName] = useState(null)
+  const [roomId, setRoomId] = useState(null)
+  const [players, setPlayers] = useState({})
+  const [gameName, setGameName] = useState(null)
+  const hostId = "1"
   const navigate = useNavigate()
-  socket.on("host-confirmation", (data) => {
-    setPlayerName(data.name)
-    setHostId(data.id)
-    setPlayerId(data.id)
-    setRoomId(data.roomId)
-    setHosting(true)
-    console.log("Now hosting room: " + roomId)
-    sessionStorage.setItem(
-      "players",
-      JSON.stringify([{ id: data.id, name: data.name }])
-    )
-    sessionStorage.setItem("round", 0)
-    sessionStorage.setItem("responses", {})
-    sessionStorage.setItem("currentGame", "")
-    sessionStorage.setItem("team1", 0)
-    sessionStorage.setItem("team2", 0)
-  })
+
+  useEffect(() => {
+    socket.emit("player-list", players)
+  }, [players])
+
   socket.on("join-confirmation", (data) => {
-    console.log("Client joined game")
-    setHostId(data.hostId)
     setRoomId(data.roomId)
-    setPlayerId(data.id)
-    setPlayerName(data.name)
+    setPlayerId(data.playerId)
+    setPlayerName(data.playerName)
   })
-  socket.on(
-    "to-lobby",
-    (isHost, roomId, gameName, isEliminated, playerName) => {
-      console.log("Being sent to lobby")
-      setHosting(isHost)
-      setEliminated(isEliminated)
-      setGameName(gameName)
-      setPlayerName(playerName)
-      setRoomId(roomId)
-      navigate("/lobby")
+  socket.on("to-lobby", (gameName) => {
+    setGameName(gameName)
+    navigate("/lobby")
+  })
+  socket.on("add-player", (player) => {
+    setPlayers({
+      ...players,
+      [player.id]: player.name,
+    })
+  })
+  socket.on("remove-player", (player) => {
+    let newPlayers = { ...players }
+    delete newPlayers[player.id]
+    setPlayers(newPlayers)
+  })
+  socket.on("player-list", (newPlayers) => {
+    if (players !== newPlayers) {
+      setPlayers(newPlayers)
     }
-  )
-  socket.on("player-list", (players) => {
-    // console.log(players)
-    setPlayers(players)
   })
   socket.on("redirect", (destination) => {
     navigate(destination)
@@ -70,20 +52,8 @@ function App({ socket }) {
     navigate("/gameover")
     socket.disconnect()
   })
-  const [gameName, setGameName] = useState("Trivia")
   return (
     <div className="App">
-      <img
-        src={Calamari}
-        alt="Calamari"
-        style={{ position: "fixed", bottom: "0", left: "10px" }}
-      />
-      <img
-        src={Calamari}
-        alt="Calamari"
-        style={{ position: "fixed", bottom: "0", right: "10px" }}
-      />
-
       <div className="d-flex">
         <div className="me-3">
           <NavLink to={"/"}>Welcome</NavLink>
@@ -105,10 +75,9 @@ function App({ socket }) {
             <Lobby
               players={players}
               playerName={playerName}
-              playerId={playerId}
               roomId={roomId}
+              playerId={playerId}
               hostId={hostId}
-              isHost={hosting}
               socket={socket}
               gameName={gameName}
             />
@@ -116,18 +85,7 @@ function App({ socket }) {
         />
         <Route
           path="/game"
-          element={
-            <Game
-              players={players}
-              playerName={playerName}
-              playerId={playerId}
-              roomId={roomId}
-              hostId={hostId}
-              isHost={hosting}
-              gameName={gameName}
-              socket={socket}
-            />
-          }
+          element={<Game gameName={gameName} socket={socket} />}
         />
         <Route
           path="/gameover"

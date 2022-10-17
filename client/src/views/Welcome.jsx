@@ -1,5 +1,6 @@
 import React from "react"
 import JoinButton from "../components/JoinButton"
+import CalamariShapes from "../components/CalamariShapes"
 
 const Welcome = ({ socket }) => {
   return (
@@ -12,6 +13,7 @@ const Welcome = ({ socket }) => {
       <div className="d-flex justify-content-center mt-3">
         <JoinButton socket={socket} />
       </div>
+      <CalamariShapes />
     </>
   )
 }

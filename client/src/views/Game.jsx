@@ -1,22 +1,20 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react"
-import { useNavigate } from "react-router-dom"
+// import { useNavigate } from "react-router-dom"
 import Trivia from "../components/Trivia"
 import RedLightGreenLight from "../components/RedLightGreenLight"
 import TugOfWar from "../components/TugOfWar"
 
-const Game = ({ socket, gameName, playerName, playerId }) => {
+const Game = ({ socket, gameName }) => {
   const [counter, setCounter] = useState(15000)
   const [answer, setAnswer] = useState(false)
-  const navigate = useNavigate()
   useEffect(() => {
     const myInterval = () => {
       if (counter > 1000) {
         setCounter((state) => state - 1000)
       } else if (counter !== 0) {
         setCounter(0)
-        socket.emit("answer-to-server", {
-          id: playerId,
-          playerName: playerName,
+        socket.emit("answer", {
           content: answer,
           team: null,
         })
@@ -28,28 +26,17 @@ const Game = ({ socket, gameName, playerName, playerId }) => {
       clearInterval(interval)
     }
   }, [counter])
-  console.log(counter)
   return (
     <div>
-      <h2>Playing a game</h2>
+      <h2>{gameName}</h2>
       {gameName === "Trivia" && (
-        <Trivia
-          answer={answer}
-          setAnswer={setAnswer}
-          playerName={playerName}
-          playerId={playerId}
-          socket={socket}
-        />
+        <Trivia answer={answer} setAnswer={setAnswer} />
       )}
-      {gameName === "RedLightGreenLight" && (
-        <RedLightGreenLight
-          playerName={playerName}
-          playerId={playerId}
-          socket={socket}
-        />
+      {gameName === "Red Light, Green Light" && (
+        <RedLightGreenLight answer={answer} setAnswer={setAnswer} />
       )}
-      {gameName === "TugOfWar" && (
-        <TugOfWar playerName={playerName} playerId={playerId} socket={socket} />
+      {gameName === "Tug-Of-War" && (
+        <TugOfWar answer={answer} setAnswer={setAnswer} />
       )}
     </div>
   )

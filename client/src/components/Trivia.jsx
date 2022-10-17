@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useState, useEffect } from "react"
-const Trivia = ({ socket, playerName, playerId, answer, setAnswer }) => {
+import React, { useState } from "react"
+const Trivia = ({ answer, setAnswer }) => {
   //keep track of clicked button
   const [picked1, setPicked1] = useState(false)
   const [picked2, setPicked2] = useState(false)

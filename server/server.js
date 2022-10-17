@@ -1,9 +1,13 @@
-const { instrument } = require("@socket.io/admin-ui")
+// const { instrument } = require("@socket.io/admin-ui")
 const io = require("socket.io")(3001, {
   cors: {
     origin: ["http://localhost:3000", "https://admin.socket.io"],
   },
 })
+let players = {
+  1: "Player 001 (Host)",
+}
+
 const oddGameList = [
   "Marbles",
   "RedLightGreenLight",
@@ -14,44 +18,44 @@ const oddGameList = [
 const evenGameList = ["TugOfWar"]
 
 // function getNextGame()
-
+const randNames = [
+  "Player 456",
+  "Player 067",
+  "Motion-Sensing Girl",
+  "Traitor Guard",
+  "The Salesman",
+  "Human Furniture",
+  "Eagle-Masked VIP",
+  "Panther-Masked VIP",
+  "Bull-Masked VIP",
+  "Lion-Masked VIP",
+  "Squid",
+  "Umbrella Dalgona",
+  "Red Envelope",
+  "Blue Envelope",
+  "Tyler Maxwell",
+  "Cursed Coffin",
+  "Fallen Contestant",
+  "Glass Bridge",
+  "Egg and Soda",
+  "Ddukbokki",
+  "Sketchy Surgeon",
+  "Pink Bow",
+  "Shady Invitation",
+  "Money Pig",
+  "Claw Machine",
+  "Square Guard",
+  "Circle Guard",
+  "Triangle Guard",
+  "Lonely Marble",
+  "Contraband Lighter",
+  "Red Hair Dye",
+  "Pastel Staircase",
+  "Birthday Toy Gun",
+]
 function pickName() {
-  const randNames = [
-    "Player 456",
-    "Player 067",
-    "Motion-Sensing Girl",
-    "Traitor Guard",
-    "The Salesman",
-    "Human Furniture",
-    "Eagle-Masked VIP",
-    "Panther-Masked VIP",
-    "Bull-Masked VIP",
-    "Lion-Masked VIP",
-    "Squid",
-    "Umbrella Dalgona",
-    "Red Envelope",
-    "Blue Envelope",
-    "Tyler Maxwell",
-    "Cursed Coffin",
-    "Fallen Contestant",
-    "Glass Bridge",
-    "Egg and Soda",
-    "Ddukbokki",
-    "Sketchy Surgeon",
-    "Pink Bow",
-    "Shady Invitation",
-    "Money Pig",
-    "Claw Machine",
-    "Square Guard",
-    "Circle Guard",
-    "Triangle Guard",
-    "Lonely Marble",
-    "Contraband Lighter",
-    "Red Hair Dye",
-    "Pastel Staircase",
-    "Birthday Toy Gun",
-  ]
-  return randNames[Math.floor(Math.random() * randNames.length) + 1]
+  let name = randNames[Math.floor(Math.random() * randNames.length) + 1]
+  return name
 }
 function generateRoomId() {
   const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
@@ -62,77 +66,52 @@ function generateRoomId() {
   return roomId
 }
 
-let hostId
-let roomId
+let hostId = "1"
 
 io.on("connection", (socket) => {
-  console.log(socket.id, "connected")
-
-  socket.on("host", (message) => {
+  socket.on("host", () => {
+    socket.join("1")
     socket.join(socket.id)
-    hostId = socket.id
-    roomId = generateRoomId()
-    console.log(hostId, "is", message, "in room", roomId)
-    io.to(hostId).emit("host-confirmation", {
+    let playerName = "Player 001 (Host)"
+    let roomId = generateRoomId()
+    // console.log(hostId, "is", message, "in room", roomId)
+    io.to(socket.id).emit("join-confirmation", {
       roomId,
-      id: hostId,
-      name: "Player 001 (Host)",
+      playerId: socket.id,
+      playerName,
     })
-    io.to(hostId).emit(
-      "to-lobby",
-      true,
-      roomId,
-      "Trivia",
-      false,
-      "Player 001 (Host)"
-    )
+    io.emit("add-player", { id: hostId, name: playerName })
+    io.to(hostId).emit("to-lobby", "Trivia")
   })
-  socket.on("join", (room) => {
-    socket.join(roomId)
+
+  socket.on("join", (roomId) => {
     socket.join(socket.id)
     let playerName = pickName()
-    console.log(socket.id, "joined room", roomId)
+    let playerId = socket.id
+    // console.log(socket.id, "joined room", roomId)
+    io.emit("add-player", { id: playerId, name: playerName })
     io.to(socket.id).emit("join-confirmation", {
-      hostId,
       roomId,
-      id: socket.id,
-      name: playerName,
+      playerId: socket.id,
+      playerName,
     })
-    io.to(socket.id).emit(
-      "to-lobby",
-      false,
-      roomId,
-      "Trivia",
-      false,
-      playerName
-    )
-    io.to(hostId).emit("player-joined", {
-      id: socket.id,
-      name: playerName,
-    })
+    io.to(socket.id).emit("to-lobby", "Trivia")
   })
-  socket.on("answer-to-server", (answer) => {
+
+  socket.on("answer", (answer) => {
     console.log(socket.id, "sent", answer.content, "to", hostId)
     // io.to(hostId).emit("answer", answer)
     if (answer.content) {
-      io.to(socket.id).emit(
-        "to-lobby",
-        false,
-        roomId,
-        "Red Light Green Light",
-        answer.content,
-        answer.playerName
-      )
+      io.to(socket.id).emit("to-lobby", "Red Light, Green Light")
     } else {
       io.to(socket.id).emit("game-over")
+      players.remove(socket.id)
     }
   })
-  socket.on("player-list-server", (players) => {
-    io.emit("player-list", players)
-  })
+
   socket.on("start-round", () => {
     io.emit("redirect", "/game")
   })
 })
 
-instrument(io, { auth: false })
+// instrument(io, { auth: false })

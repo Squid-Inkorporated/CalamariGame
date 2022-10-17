@@ -1,32 +1,39 @@
 import React from "react"
+import CalamariShapes from "../components/CalamariShapes"
 import HowToPlay from "../components/HowToPlay"
 
-const Lobby = ({ socket, isHost, roomId, players, gameName, playerName }) => {
+const Lobby = ({
+  socket,
+  playerId,
+  hostId,
+  roomId,
+  players,
+  gameName,
+  playerName,
+}) => {
   const handleClick = () => {
     socket.emit("start-round")
   }
-  // get status of game
-  // display players in lobby
+
   return (
     <div>
       <h1>{gameName}</h1>
-      {isHost && <p>You're the host!</p>}
-      <p>waiting for other players</p>
+      {playerId === hostId && <p>You're the host!</p>}
+      <HowToPlay gameName={gameName} />
       <strong>Players in Lobby:</strong>
       <ul>
         {players &&
-          players.map((player, idx) => {
-            return player.name === playerName ? (
-              <li className="squidGreen" key={idx}>
-                {player.name + " (You)"}
+          Object.keys(players).map((id) => {
+            return players[id] === playerName ? (
+              <li className="squidGreen" key={id}>
+                {players[id] + " (You)"}
               </li>
             ) : (
-              <li key={idx}>{player.name}</li>
+              <li key={id}>{players[id]}</li>
             )
           })}
       </ul>
-      <HowToPlay gameName={gameName} />
-      {isHost ? (
+      {playerId === hostId ? (
         <button className="btn mt-3" onClick={handleClick}>
           Start
         </button>
@@ -36,6 +43,7 @@ const Lobby = ({ socket, isHost, roomId, players, gameName, playerName }) => {
       <h4 className="display-2 position-absolute bottom-0 start-50 translate-middle-x">
         Room <span className="readable">{roomId}</span>
       </h4>
+      <CalamariShapes />
     </div>
   )
 }

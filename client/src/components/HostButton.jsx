@@ -4,12 +4,12 @@ import React from "react"
 const HostButton = ({ socket }) => {
   const handleClick = (e) => {
     e.preventDefault()
-    socket.emit("host", "hosting the game")
+    socket.emit("host")
   }
   return (
     <div>
       <a className="btn" href="#" onClick={handleClick}>
-        Host
+        Host Game
       </a>
     </div>
   )

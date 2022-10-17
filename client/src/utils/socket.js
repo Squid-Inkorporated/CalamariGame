@@ -7,7 +7,6 @@ socket.on("connect", () => {
 export let hostId
 
 // HOST-ONLY
-let answerCount = 0
 
 socket.on("player-joined", (player) => {
   console.log("someone joined the room: " + player.name)
@@ -22,11 +21,6 @@ socket.on("player-joined", (player) => {
 socket.on("answer", (answer) => {
   console.log("answer received from: " + answer.id)
   if (!answer.team) {
-    // sessionStorage.setItem("responses", {
-    //   ...sessionStorage.getItem("responses"),
-    //   [answer.id]: answer.content,
-    // })
-    // reply to user
   } else {
     switch (sessionStorage.getItem("currentGame")) {
       case "TugOfWar":
@@ -34,34 +28,34 @@ socket.on("answer", (answer) => {
           answer.team,
           sessionStorage.getItem(answer.team) + answer.content
         )
-        answerCount++
+        // answerCount++
         break
       default:
         console.error("Invalid game name...")
     }
   }
-  if (answerCount >= sessionStorage.getItem("players").length) {
-    handleRoundEnd(sessionStorage.getItem("currentGame"))
-  }
+  // if (answerCount >= sessionStorage.getItem("players").length) {
+  //   handleRoundEnd(sessionStorage.getItem("currentGame"))
+  // }
 })
 
-function handleRoundEnd(currentGame) {
-  switch (currentGame) {
-    case "TugOfWar":
-      let winningTeam
-      let team1Score = sessionStorage.getItem("team1")
-      let team2Score = sessionStorage.getItem("team2")
-      if (team1Score > team2Score) {
-        winningTeam = "team1"
-      } else if (team1Score < team2Score) {
-        winningTeam = "team2"
-      } else {
-        winningTeam = "tie"
-      }
-      console.log(winningTeam)
-      break
-    default:
-      // solo games, trivia
-      return
-  }
-}
+// function handleRoundEnd(currentGame) {
+//   switch (currentGame) {
+//     case "TugOfWar":
+//       let winningTeam
+//       let team1Score = sessionStorage.getItem("team1")
+//       let team2Score = sessionStorage.getItem("team2")
+//       if (team1Score > team2Score) {
+//         winningTeam = "team1"
+//       } else if (team1Score < team2Score) {
+//         winningTeam = "team2"
+//       } else {
+//         winningTeam = "tie"
+//       }
+//       console.log(winningTeam)
+//       break
+//     default:
+//       // solo games, trivia
+//       return
+//   }
+// }
