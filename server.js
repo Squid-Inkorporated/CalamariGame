@@ -99,11 +99,11 @@ io.on("connection", (socket) => {
 
   socket.on("answer", (answer) => {
     console.log(socket.id, "sent", answer.content, "to", hostId)
-    // io.to(hostId).emit("answer", answer)
     if (answer.content) {
       io.to(socket.id).emit("to-lobby", "Red Light, Green Light")
     } else {
       io.to(socket.id).emit("game-over")
+      io.emit("remove-player", socket.id)
     }
   })
 

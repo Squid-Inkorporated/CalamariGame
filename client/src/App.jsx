@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react"
 import { Routes, Route, NavLink, useNavigate } from "react-router-dom"
@@ -16,14 +17,14 @@ function App({ socket }) {
   const hostId = "1"
   const navigate = useNavigate()
 
-  useEffect(() => {
-    socket.emit("player-list", players)
-  }, [players])
+  // useEffect(() => {
+  //   socket.emit("player-list", players)
+  // }, [players])
 
   socket.on("join-confirmation", (data) => {
-    setRoomId(data.roomId)
     setPlayerId(data.playerId)
     setPlayerName(data.playerName)
+    setRoomId(data.roomId)
   })
   socket.on("to-lobby", (gameName) => {
     setGameName(gameName)
@@ -35,16 +36,16 @@ function App({ socket }) {
       [player.id]: player.name,
     })
   })
-  socket.on("remove-player", (player) => {
+  socket.on("remove-player", (playerId) => {
     let newPlayers = { ...players }
-    delete newPlayers[player.id]
+    delete newPlayers[playerId]
     setPlayers(newPlayers)
   })
-  socket.on("player-list", (newPlayers) => {
-    if (players !== newPlayers) {
-      setPlayers(newPlayers)
-    }
-  })
+  // socket.on("player-list", (newPlayers) => {
+  //   if (players !== newPlayers) {
+  //     setPlayers(newPlayers)
+  //   }
+  // })
   socket.on("redirect", (destination) => {
     navigate(destination)
   })
@@ -54,14 +55,14 @@ function App({ socket }) {
   })
   return (
     <div className="App">
-      <div className="d-flex">
+      {/* <div className="d-flex">
         <div className="me-3">
           <NavLink to={"/"}>Welcome</NavLink>
         </div>
         <div className="me-3">
           <NavLink to={"/host"}>Host</NavLink>
         </div>
-      </div>
+      </div> */}
       <Routes>
         <Route path="/" element={<Welcome socket={socket} />} />
         <Route path="/host" element={<HostPage socket={socket} />} />
