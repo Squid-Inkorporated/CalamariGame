@@ -9,16 +9,16 @@ let players = {
 }
 
 // picking games assets
-const playedGames = [];
+const playedGames = []
 const gameList = [
   "Marbles",
-  "Red Light, Green Light",
+  // "Red Light, Green Light",
   "Trivia2",
   "Trivia",
   // "ThePopularThing",
   // "TugOfWar"
 ]
-
+let nextGame = pickGame(gameList, playedGames)
 // function getNextGame()
 const randNames = [
   "Player 456",
@@ -59,7 +59,7 @@ const randNames = [
   "Iconic Green Tracksuit",
   "Execution Playground",
   "Green Voting Button",
-  "Red Voting Button"
+  "Red Voting Button",
 ]
 function pickName() {
   let name = randNames[Math.floor(Math.random() * randNames.length) + 1]
@@ -89,7 +89,7 @@ io.on("connection", (socket) => {
       playerName,
     })
     io.emit("add-player", { id: hostId, name: playerName })
-    io.to(hostId).emit("to-lobby", "Red Light, Green Light")
+    io.to(hostId).emit("to-lobby", "Trivia")
   })
 
   socket.on("join", (roomId) => {
@@ -103,13 +103,13 @@ io.on("connection", (socket) => {
       playerId: socket.id,
       playerName,
     })
-    io.to(socket.id).emit("to-lobby", "Red Light, Green Light")
+    io.to(socket.id).emit("to-lobby", "Trivia")
   })
 
   socket.on("answer", (answer) => {
     console.log(socket.id, "sent", answer.content, "to", hostId)
     if (answer.content) {
-      io.to(socket.id).emit("to-lobby", pickGame(gameList, playedGames))
+      io.to(socket.id).emit("to-lobby", nextGame)
     } else {
       io.to(socket.id).emit("game-over")
       io.emit("remove-player", socket.id)
@@ -117,6 +117,7 @@ io.on("connection", (socket) => {
   })
 
   socket.on("start-round", () => {
+    nextGame = pickGame(gameList, playedGames)
     io.emit("redirect", "/game")
   })
 })
