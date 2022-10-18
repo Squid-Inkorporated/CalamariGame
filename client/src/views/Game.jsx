@@ -2,8 +2,10 @@
 import React, { useState, useEffect } from "react"
 // import { useNavigate } from "react-router-dom"
 import Trivia from "../components/Trivia"
+import Trivia2 from "../components/Trivia2"
 import RedLightGreenLight from "../components/RedLightGreenLight"
 import TugOfWar from "../components/TugOfWar"
+import Marbles from "../components/Marbles"
 
 const Game = ({ socket, gameName }) => {
   const [timer, setTimer] = useState(15000)
@@ -34,8 +36,15 @@ const Game = ({ socket, gameName }) => {
       {gameName === "Trivia" && (
         <Trivia answer={answer} setAnswer={setAnswer} />
       )}
+      {gameName === "Trivia2" && (
+        <Trivia2 setAnswer={setAnswer} answer={answer}
+        />
+      )}
       {gameName === "Red Light, Green Light" && (
         <RedLightGreenLight setAnswer={setAnswer} />
+      )}
+      {gameName === "Marbles" && (
+        <Marbles setAnswer={setAnswer} answer={answer} />
       )}
       {gameName === "Tug-Of-War" && (
         <TugOfWar answer={answer} setAnswer={setAnswer} />

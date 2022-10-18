@@ -1,3 +1,4 @@
+const pickGame = require("./gameLogic")
 const io = require("socket.io")(3001, {
   cors: {
     origin: ["http://localhost:3000", "https://admin.socket.io"],
@@ -7,20 +8,22 @@ let players = {
   1: "Player 001 (Host)",
 }
 
-const oddGameList = [
+// picking games assets
+const playedGames = [];
+const gameList = [
   "Marbles",
-  "RedLightGreenLight",
+  "Red Light, Green Light",
   "Trivia2",
-  "Trivia3",
-  "ThePopularThing",
+  "Trivia",
+  // "ThePopularThing",
+  // "TugOfWar"
 ]
-const evenGameList = ["TugOfWar"]
 
 // function getNextGame()
 const randNames = [
   "Player 456",
   "Player 067",
-  "Motion-Sensing Girl",
+  "Motion-Sensing Doll",
   "Traitor Guard",
   "The Salesman",
   "Human Furniture",
@@ -36,21 +39,27 @@ const randNames = [
   "Cursed Coffin",
   "Fallen Contestant",
   "Glass Bridge",
-  "Egg and Soda",
+  "Egg and Soda Breakfast",
   "Ddukbokki",
   "Sketchy Surgeon",
   "Pink Bow",
   "Shady Invitation",
   "Money Pig",
   "Claw Machine",
-  "Square Guard",
-  "Circle Guard",
-  "Triangle Guard",
+  "Square-Masked Guard",
+  "Circle-Masked Guard",
+  "Triangle-Masked Guard",
   "Lonely Marble",
   "Contraband Lighter",
   "Red Hair Dye",
   "Pastel Staircase",
   "Birthday Toy Gun",
+  "Glass Shard",
+  "Murder Attempt Knife",
+  "Iconic Green Tracksuit",
+  "Execution Playground",
+  "Green Voting Button",
+  "Red Voting Button"
 ]
 function pickName() {
   let name = randNames[Math.floor(Math.random() * randNames.length) + 1]
@@ -94,13 +103,13 @@ io.on("connection", (socket) => {
       playerId: socket.id,
       playerName,
     })
-    io.to(socket.id).emit("to-lobby", "Trivia")
+    io.to(socket.id).emit("to-lobby", "Red Light, Green Light")
   })
 
   socket.on("answer", (answer) => {
     console.log(socket.id, "sent", answer.content, "to", hostId)
     if (answer.content) {
-      io.to(socket.id).emit("to-lobby", "Red Light, Green Light")
+      io.to(socket.id).emit("to-lobby", pickGame(gameList, playedGames))
     } else {
       io.to(socket.id).emit("game-over")
       io.emit("remove-player", socket.id)

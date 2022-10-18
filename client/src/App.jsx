@@ -7,6 +7,7 @@ import Welcome from "./views/Welcome"
 import Game from "./views/Game"
 import Lobby from "./views/Lobby"
 import GameOver from "./views/GameOver"
+import Calamari from "./assets/calamari.png"
 
 function App({ socket }) {
   const [playerId, setPlayerId] = useState(null)
