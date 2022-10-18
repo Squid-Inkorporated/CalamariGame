@@ -6,7 +6,7 @@ const JoinButton = ({ socket }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    socket.emit("join", room.toUpperCase())
+    socket.emit("join", room)
     console.log("Joined room: ", room)
   }
 
@@ -16,7 +16,7 @@ const JoinButton = ({ socket }) => {
         <input
           type="text"
           value={room}
-          onChange={(e) => setRoom(e.target.value)}
+          onChange={(e) => setRoom(e.target.value.toUpperCase())}
         />
         <input className="btn ms-3" type="submit" value="Join Game" />
       </form>

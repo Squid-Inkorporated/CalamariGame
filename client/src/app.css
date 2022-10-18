@@ -33,11 +33,9 @@ body {
   color: #249f9c;
 }
 
-
 .marbleDiv1 {
   margin-top: 25%;
 }
-
 
 /* you lose */
 @keyframes mymove1 {
@@ -85,4 +83,8 @@ body {
 .money {
   width: 6%;
   margin-right: 1%;
+}
+
+.card {
+  background-image: linear-gradient(to top, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.2) 100%);
 }

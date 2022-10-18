@@ -10,3 +10,13 @@ const pickGame = (gameArray, playedGamesArray) => {
 
 module.exports = pickGame;
 
+// const playedGames = [];
+// const gameList = [
+//   "Marbles",
+//   "RedLightGreenLight",
+//   "Trivia2",
+//   "Trivia",
+//   // "ThePopularThing",
+//   // "TugOfWar"
+// ]
+
