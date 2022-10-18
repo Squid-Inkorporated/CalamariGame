@@ -32,3 +32,57 @@ body {
 .squidGreen {
   color: #249f9c;
 }
+
+
+.marbleDiv1 {
+  margin-top: 25%;
+}
+
+
+/* you lose */
+@keyframes mymove1 {
+  0% {
+    bottom: 30%;
+    left: 10%;
+  }
+  50% {
+    bottom: 30%;
+    left: calc(50% - 100px);
+  }
+  100% {
+    bottom: 30%;
+    left: calc(50% - 100px);
+  	/* bottom: 30%;
+    left: 10%; */
+    
+  }
+}
+
+/* you win */
+
+@keyframes mymove2 {
+  0% {
+    bottom: 30%;
+    left: 10%;
+  }
+  50% {
+    bottom: 30%;
+    left: calc(90% - 100px);
+  }
+  100% {
+    bottom: 30%;
+    left: calc(90% - 100px);
+  	/* bottom: 30%;
+    left: 10%; */
+  }
+}
+
+
+.guard {
+  width: 7%;
+}
+
+.money {
+  width: 6%;
+  margin-right: 1%;
+}
