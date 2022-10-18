@@ -6,14 +6,15 @@ import RedLightGreenLight from "../components/RedLightGreenLight"
 import TugOfWar from "../components/TugOfWar"
 
 const Game = ({ socket, gameName }) => {
-  const [counter, setCounter] = useState(15000)
+  const [timer, setTimer] = useState(15000)
   const [answer, setAnswer] = useState(false)
+
   useEffect(() => {
     const myInterval = () => {
-      if (counter > 1000) {
-        setCounter((state) => state - 1000)
-      } else if (counter !== 0) {
-        setCounter(0)
+      if (timer > 1000) {
+        setTimer((state) => state - 1000)
+      } else if (timer !== 0) {
+        setTimer(0)
         socket.emit("answer", {
           content: answer,
           team: null,
@@ -25,7 +26,8 @@ const Game = ({ socket, gameName }) => {
     return () => {
       clearInterval(interval)
     }
-  }, [counter])
+  }, [timer])
+
   return (
     <div>
       <h2>{gameName}</h2>
@@ -33,7 +35,7 @@ const Game = ({ socket, gameName }) => {
         <Trivia answer={answer} setAnswer={setAnswer} />
       )}
       {gameName === "Red Light, Green Light" && (
-        <RedLightGreenLight answer={answer} setAnswer={setAnswer} />
+        <RedLightGreenLight setAnswer={setAnswer} />
       )}
       {gameName === "Tug-Of-War" && (
         <TugOfWar answer={answer} setAnswer={setAnswer} />

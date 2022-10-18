@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState } from "react"
-const Trivia = ({ answer, setAnswer }) => {
+const Trivia = ({ setAnswer }) => {
+  let answer = ""
   //keep track of clicked button
   const [picked1, setPicked1] = useState(false)
   const [picked2, setPicked2] = useState(false)
@@ -17,18 +18,22 @@ const Trivia = ({ answer, setAnswer }) => {
     //swicth statement when clicked
     switch (e.target.id) {
       case "1":
+        answer = e.target.value
         setPicked1(true)
         setAnswer(false)
         break
       case "2":
+        answer = e.target.value
         setPicked2(true)
         setAnswer(false)
         break
       case "3":
+        answer = e.target.value
         setPicked3(true)
         setAnswer(true)
         break
       case "4":
+        answer = e.target.value
         setPicked4(true)
         setAnswer(false)
         break
@@ -98,7 +103,7 @@ const Trivia = ({ answer, setAnswer }) => {
           </button>
         </div>
       </div>
-      <p className="text-center">Your answer: {answer}</p>
+      {answer && <p className="text-center">Your answer: {answer}</p>}
     </div>
   )
 }

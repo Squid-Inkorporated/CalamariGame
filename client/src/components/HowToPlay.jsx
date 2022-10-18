@@ -17,10 +17,20 @@ const HowToPlay = ({ gameName }) => {
                   <span className="text-danger"> possibly</span> live!
                 </p>
               )}
-              {gameName === "ThePopularThing" && (
+              {gameName === "The Popular Thing" && (
                 <p className="mb-0">
                   Pick your favorite thing from the provided options. Those who
                   choose the least popular option will be eliminated.
+                </p>
+              )}
+              {gameName === "Red Light, Green Light" && (
+                <p className="mb-0">
+                  Run for your life! Tap the button and reach 50 within 15
+                  seconds. The light will change from{" "}
+                  <span style={{ color: "green" }}>green</span> to{" "}
+                  <span style={{ color: "yellow" }}>yellow</span> to{" "}
+                  <span style={{ color: "red" }}>red</span>. Do NOT run on a red
+                  light!
                 </p>
               )}
             </div>

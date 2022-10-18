@@ -6,7 +6,7 @@ const GameOver = ({ playerName }) => {
     <div className="text-center">
       <h1>Calamari Game</h1>
       <div className="row justify-content-center">
-        <p>Sorry, {playerName}, you have not survived!</p>
+        <p>Sorry {playerName}, you have not survived!</p>
         <div className="col">
           <img src={RipSquid} alt="" className="w-100" />
         </div>

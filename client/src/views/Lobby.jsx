@@ -41,7 +41,7 @@ const Lobby = ({
         <p className="mt-3">Waiting for host to start the game...</p>
       )}
       <h4 className="display-2 position-absolute bottom-0 start-50 translate-middle-x">
-        Room <span className="readable">{roomId}</span>
+        Room: <span className="readable">{roomId}</span>
       </h4>
       <CalamariShapes />
     </div>

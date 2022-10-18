@@ -1,4 +1,3 @@
-// const { instrument } = require("@socket.io/admin-ui")
 const io = require("socket.io")(3001, {
   cors: {
     origin: ["http://localhost:3000", "https://admin.socket.io"],
@@ -77,11 +76,11 @@ io.on("connection", (socket) => {
     // console.log(hostId, "is", message, "in room", roomId)
     io.to(socket.id).emit("join-confirmation", {
       roomId,
-      playerId: socket.id,
+      playerId: hostId,
       playerName,
     })
     io.emit("add-player", { id: hostId, name: playerName })
-    io.to(hostId).emit("to-lobby", "Trivia")
+    io.to(hostId).emit("to-lobby", "Red Light, Green Light")
   })
 
   socket.on("join", (roomId) => {
@@ -105,7 +104,6 @@ io.on("connection", (socket) => {
       io.to(socket.id).emit("to-lobby", "Red Light, Green Light")
     } else {
       io.to(socket.id).emit("game-over")
-      players.remove(socket.id)
     }
   })
 
@@ -113,5 +111,3 @@ io.on("connection", (socket) => {
     io.emit("redirect", "/game")
   })
 })
-
-// instrument(io, { auth: false })

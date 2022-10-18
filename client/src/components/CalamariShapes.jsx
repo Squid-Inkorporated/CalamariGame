@@ -7,14 +7,19 @@ const CalamariShapes = () => {
       <img
         src={Calamari}
         alt="Calamari"
-        style={{ position: "fixed", bottom: "0", left: "10px", height: "25vh" }}
+        style={{
+          position: "fixed",
+          bottom: "10px",
+          left: "10px",
+          height: "25vh",
+        }}
       />
       <img
         src={Calamari}
         alt="Calamari"
         style={{
           position: "fixed",
-          bottom: "0",
+          bottom: "10px",
           right: "10px",
           height: "25vh",
         }}

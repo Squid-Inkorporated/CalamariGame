@@ -61,10 +61,6 @@ function App({ socket }) {
         <div className="me-3">
           <NavLink to={"/host"}>Host</NavLink>
         </div>
-        <div className="me-3">
-          <NavLink to={"/lobby"}>Lobby</NavLink>
-        </div>
-        <NavLink to={"/game"}>Game</NavLink>
       </div>
       <Routes>
         <Route path="/" element={<Welcome socket={socket} />} />
