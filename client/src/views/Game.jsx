@@ -6,6 +6,7 @@ import Trivia2 from "../components/Trivia2"
 import RedLightGreenLight from "../components/RedLightGreenLight"
 import TugOfWar from "../components/TugOfWar"
 import Marbles from "../components/Marbles"
+import GlassBridge from "../components/GlassBridge"
 
 const Game = ({ socket, gameName }) => {
   const [timer, setTimer] = useState(15000)
@@ -48,6 +49,10 @@ const Game = ({ socket, gameName }) => {
       )}
       {gameName === "Tug-Of-War" && (
         <TugOfWar answer={answer} setAnswer={setAnswer} />
+      )}
+      {gameName === "GlassBridge" && (
+        <GlassBridge setAnswer={setAnswer} answer={answer}
+        />
       )}
     </div>
   )

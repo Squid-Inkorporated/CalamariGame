@@ -33,6 +33,11 @@ const HowToPlay = ({ gameName }) => {
                   light!
                 </p>
               )}
+              {gameName === "GlassBridge" && (
+                <p className="mb-0">
+                  Start from LEFT to RIGHT. Pick the right tile and try not to fall.
+                </p>
+              )}
             </div>
           </div>
         </div>

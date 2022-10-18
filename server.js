@@ -12,7 +12,7 @@ let players = {
 const playedGames = [];
 const gameList = [
   "Marbles",
-  "Red Light, Green Light",
+  // "Red Light, Green Light",
   "Trivia2",
   "Trivia",
   // "ThePopularThing",
@@ -89,7 +89,7 @@ io.on("connection", (socket) => {
       playerName,
     })
     io.emit("add-player", { id: hostId, name: playerName })
-    io.to(hostId).emit("to-lobby", "Red Light, Green Light")
+    io.to(hostId).emit("to-lobby", "GlassBridge")
   })
 
   socket.on("join", (roomId) => {
@@ -103,7 +103,7 @@ io.on("connection", (socket) => {
       playerId: socket.id,
       playerName,
     })
-    io.to(socket.id).emit("to-lobby", "Red Light, Green Light")
+    io.to(socket.id).emit("to-lobby", "GlassBridge")
   })
 
   socket.on("answer", (answer) => {
