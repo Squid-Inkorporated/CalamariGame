@@ -89,7 +89,7 @@ io.on("connection", (socket) => {
       playerName,
     })
     io.emit("add-player", { id: hostId, name: playerName })
-    io.to(hostId).emit("to-lobby", "GlassBridge")
+    io.to(hostId).emit("to-lobby", "Trivia")
   })
 
   socket.on("join", (roomId) => {
@@ -103,7 +103,7 @@ io.on("connection", (socket) => {
       playerId: socket.id,
       playerName,
     })
-    io.to(socket.id).emit("to-lobby", "GlassBridge")
+    io.to(socket.id).emit("to-lobby", "Trivia")
   })
 
   socket.on("answer", (answer) => {
