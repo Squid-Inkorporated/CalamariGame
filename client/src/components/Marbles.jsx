@@ -23,41 +23,27 @@ const Marbles = ({ setAnswer }) => {
 
   return (
     <div>
-      <h2>Marbles Game</h2>
+      {visible && (<button className='btn mt-5 mb-5' onClick={handleClick}>Click to Throw your Marble.</button>)}
+      {playerMarble < 50
+       ? 
+       <p style={{ fontSize: "36px", marginTop: "100px", color: "white" }}> Sorry, Your marble traveled only <span style={{ fontsize: "bolder", color: "#ed1b76" }} className='readable'>{playerMarble}</span> feet.</p>
+      : 
+      <p style={{ fontSize: "36px", marginTop: "100px", color: "white"  }}> Congratulations, Your marble traveled <span style={{ fontsize: "bolder", color: "#ed1b76" }} className='readable'>{playerMarble}</span> feet. You passed the survival goal.</p>
+      }
 
-      {visible && (
-        <button className="btn mt-5 mb-5" onClick={handleClick}>
-          Click to Throw your Marble.
-        </button>
-      )}
-      {playerMarble && (
-        <p style={{ fontSize: "36px" }}>
-          {" "}
-          Your marble traveled{" "}
-          <span
-            style={{ color: "white", fontsize: "bolder" }}
-            className="readable"
-          >
-            {playerMarble}
-          </span>{" "}
-          feet.
-        </p>
-      )}
-
-      {playerMarble && <MoveBall playerMarble={playerMarble} />}
-
-      <div className="d-flex pull-left ml-5">
-        {(() => {
-          let guardLine = []
-          let moneyLine = []
-          for (let i = 0; i < 7; i++) {
-            guardLine.push(
-              <img className="guard" src={guards} alt="guards with coffin" />
-            )
-            moneyLine.push(<img className="money" src={money} alt="money" />)
-          }
-          return guardLine.concat(moneyLine)
-        })()}
+      {playerMarble && <MoveBall playerMarble={playerMarble} className="marbleDiv" />}
+      <div className='position-absolute top-50'>
+        <div className='d-flex ml-5'>
+          {(() => {
+            let guardLine = [];
+            let moneyLine = [];
+            for (let i = 0; i < 5; i++) {
+              guardLine.push(<img className='guard' src={guards} alt="guards with coffin" />);
+              moneyLine.push(<img className='money' src={money} alt="money" />);
+            }
+            return guardLine.concat(moneyLine)
+          })()}
+        </div>
       </div>
     </div>
   )
