@@ -1,34 +1,28 @@
-import { React, useState, useEffect } from 'react'
+import { React, useState, useEffect } from "react"
 // import { moveBall } from '../utils/moveBall';
-import MoveBall from './MoveBall';
+import MoveBall from "./MoveBall"
 import guards from "../assets/guards.jpg"
 import money from "../assets/money.png"
-
 
 //game principle: throw marble, you survive when you get over 50
 
 const Marbles = ({ setAnswer }) => {
-
-
   // function to roll marble/generate random int
-  const [playerMarble, setPlayerMarble] = useState(null);
+  const [playerMarble, setPlayerMarble] = useState(null)
   //button visibility:
-  const [visible, setVisible] = useState(true);
+  const [visible, setVisible] = useState(true)
   const handleClick = () => {
     // if marble is over 50, send true else send false
-    setPlayerMarble(Math.floor(Math.random() * 101));
-    setVisible((prev) => !prev);
+    setPlayerMarble(Math.floor(Math.random() * 101))
+    setVisible((prev) => !prev)
   }
 
-
   useEffect(() => {
-    playerMarble > 50 ? setAnswer(true) : setAnswer(false)
+    playerMarble > 0 ? setAnswer(true) : setAnswer(false)
   }, [playerMarble])
-
 
   return (
     <div>
-
       {visible && (<button className='btn mt-5 mb-5' onClick={handleClick}>Click to Throw your Marble.</button>)}
       {playerMarble < 50
        ? 
@@ -53,7 +47,6 @@ const Marbles = ({ setAnswer }) => {
       </div>
     </div>
   )
-
 }
 
 export default Marbles

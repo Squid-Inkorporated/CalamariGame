@@ -39,20 +39,20 @@ const Lobby = ({
         </div>
       </div>
       <div
-        style={{ bottom: "5rem" }}
+        style={{ bottom: "10rem" }}
         className="position-absolute start-50 translate-middle-x"
       >
         {playerId === hostId ? (
-          <button className="btn mt-3" onClick={handleClick}>
+          <button className="btn" onClick={handleClick}>
             Start
           </button>
         ) : (
           <p className="mt-3">Waiting for host to start the game...</p>
         )}
       </div>
-      <h6 className="display-2 position-absolute bottom-0 start-50 translate-middle-x">
-        Room: <span className="readable">{roomId}</span>
-      </h6>
+      <h1 className="readable position-absolute bottom-0 start-50 translate-middle-x">
+        Room: {roomId}
+      </h1>
       <CalamariShapes />
     </div>
   )

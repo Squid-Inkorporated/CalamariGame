@@ -1,22 +1,12 @@
-// game picking logi
+// game picking logic
 const pickGame = (gameArray, playedGamesArray) => {
+  if (gameArray.length == playedGamesArray.length) return null
   let pickedGame = gameArray[Math.floor(Math.random() * gameArray.length)]
-  while(playedGamesArray.includes(pickedGame)) {
-    pickedGame = gameArray[Math.floor(Math.random() * gameArray.length)];
+  while (playedGamesArray.includes(pickedGame)) {
+    pickedGame = gameArray[Math.floor(Math.random() * gameArray.length)]
   }
-  playedGamesArray.push(pickedGame);
-  return pickedGame;
+  playedGamesArray.push(pickedGame)
+  return pickedGame
 }
 
-module.exports = pickGame;
-
-// const playedGames = [];
-// const gameList = [
-//   "Marbles",
-//   "RedLightGreenLight",
-//   "Trivia2",
-//   "Trivia",
-//   // "ThePopularThing",
-//   // "TugOfWar"
-// ]
-
+module.exports = pickGame
