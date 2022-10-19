@@ -1,6 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react"
-// import { useNavigate } from "react-router-dom"
 import Trivia from "../components/Trivia"
 import Trivia2 from "../components/Trivia2"
 import RedLightGreenLight from "../components/RedLightGreenLight"
@@ -33,13 +32,18 @@ const Game = ({ socket, gameName }) => {
 
   return (
     <div>
-      <h2>{gameName}</h2>
+      <h2>
+        {gameName === "Trivia" ||
+        gameName === "Trivia 2" ||
+        gameName === "Trivia 3"
+          ? "Trivia"
+          : gameName}
+      </h2>
       {gameName === "Trivia" && (
         <Trivia answer={answer} setAnswer={setAnswer} />
       )}
-      {gameName === "Trivia2" && (
-        <Trivia2 setAnswer={setAnswer} answer={answer}
-        />
+      {gameName === "Trivia 2" && (
+        <Trivia2 setAnswer={setAnswer} answer={answer} />
       )}
       {gameName === "Red Light, Green Light" && (
         <RedLightGreenLight setAnswer={setAnswer} />
@@ -47,13 +51,15 @@ const Game = ({ socket, gameName }) => {
       {gameName === "Marbles" && (
         <Marbles setAnswer={setAnswer} answer={answer} />
       )}
-      {gameName === "Tug-Of-War" && (
+      {gameName === "Tug of War" && (
         <TugOfWar answer={answer} setAnswer={setAnswer} />
       )}
-      {gameName === "GlassBridge" && (
-        <GlassBridge setAnswer={setAnswer} answer={answer}
-        />
+      {gameName === "Glass Bridge" && (
+        <GlassBridge setAnswer={setAnswer} answer={answer} />
       )}
+      <div className="display-1 position-absolute bottom-0 start-50 translate-middle-x">
+        {timer.toString().slice(0, -3)}
+      </div>
     </div>
   )
 }

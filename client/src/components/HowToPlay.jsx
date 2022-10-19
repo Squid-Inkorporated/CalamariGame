@@ -17,6 +17,13 @@ const HowToPlay = ({ gameName }) => {
                   <span className="text-danger"> possibly</span> live!
                 </p>
               )}
+              {gameName === "Trivia 2" && (
+                <p className="mb-0">
+                  Select the right answer from multiple options. You have 15
+                  seconds to choose and
+                  <span className="text-danger"> possibly</span> live!
+                </p>
+              )}
               {gameName === "The Popular Thing" && (
                 <p className="mb-0">
                   Pick your favorite thing from the provided options. Those who
@@ -35,7 +42,8 @@ const HowToPlay = ({ gameName }) => {
               )}
               {gameName === "GlassBridge" && (
                 <p className="mb-0">
-                  Start from LEFT to RIGHT. Pick the right tile and try not to fall.
+                  Start from LEFT to RIGHT. Pick the right tile and try not to
+                  fall.
                 </p>
               )}
             </div>

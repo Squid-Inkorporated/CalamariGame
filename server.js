@@ -4,22 +4,18 @@ const io = require("socket.io")(3001, {
     origin: ["http://localhost:3000", "https://admin.socket.io"],
   },
 })
-let players = {
-  1: "Player 001 (Host)",
-}
+const players = {}
 
 // picking games assets
 const playedGames = []
 const gameList = [
   "Marbles",
-  // "Red Light, Green Light",
-  "Trivia2",
+  "Trivia 2",
   "Trivia",
-  // "ThePopularThing",
-  // "TugOfWar"
+  // "The Popular Thing",
+  // "Tug of War"
 ]
-let nextGame = pickGame(gameList, playedGames)
-// function getNextGame()
+let nextGame = "Red Light, Green Light"
 const randNames = [
   "Player 456",
   "Player 067",
@@ -61,10 +57,12 @@ const randNames = [
   "Green Voting Button",
   "Red Voting Button",
 ]
+
 function pickName() {
   let name = randNames[Math.floor(Math.random() * randNames.length) + 1]
   return name
 }
+
 function generateRoomId() {
   const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
   let roomId = ""
@@ -82,37 +80,52 @@ io.on("connection", (socket) => {
     socket.join(socket.id)
     let playerName = "Player 001 (Host)"
     let roomId = generateRoomId()
-    // console.log(hostId, "is", message, "in room", roomId)
     io.to(socket.id).emit("join-confirmation", {
       roomId,
       playerId: hostId,
       playerName,
     })
-    io.emit("add-player", { id: hostId, name: playerName })
-    io.to(hostId).emit("to-lobby", "Trivia")
+    players["1"] = playerName
+    console.log(players)
+    io.emit("sync-players", players)
+    io.to(hostId).emit("to-lobby", nextGame)
   })
 
   socket.on("join", (roomId) => {
     socket.join(socket.id)
     let playerName = pickName()
-    let playerId = socket.id
-    // console.log(socket.id, "joined room", roomId)
-    io.emit("add-player", { id: playerId, name: playerName })
+    players[socket.id] = playerName
+    console.log(players)
+    io.emit("sync-players", players)
     io.to(socket.id).emit("join-confirmation", {
       roomId,
       playerId: socket.id,
       playerName,
     })
-    io.to(socket.id).emit("to-lobby", "Trivia")
+    io.to(socket.id).emit("to-lobby", nextGame)
   })
 
+  // TODO: FIX THE INFINITE LOOP
   socket.on("answer", (answer) => {
-    console.log(socket.id, "sent", answer.content, "to", hostId)
     if (answer.content) {
-      io.to(socket.id).emit("to-lobby", nextGame)
+      if (!nextGame) {
+        console.log("You Win!")
+        io.to(socket.id).emit("you-win")
+        delete players[socket.id]
+      } else {
+        io.to(socket.id).emit("to-lobby", nextGame)
+      }
+      console.log(players)
+      if (players == {}) {
+        gameList.concat(playedGames)
+        playedGames = []
+        console.log("The Calamari Game has concluded.")
+      }
     } else {
-      io.to(socket.id).emit("game-over")
-      io.emit("remove-player", socket.id)
+      io.to(socket.id).emit("redirect", "/gameover")
+      delete players[socket.id]
+      console.log(players)
+      io.emit("sync-players", players)
     }
   })
 
