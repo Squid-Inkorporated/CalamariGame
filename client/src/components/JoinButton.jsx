@@ -12,13 +12,28 @@ const JoinButton = ({ socket }) => {
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          value={room}
-          onChange={(e) => setRoom(e.target.value.toUpperCase())}
-        />
-        <input className="btn ms-3" type="submit" value="Join Game" />
+      <form
+        className="position-absolute top-50 start-50 translate-middle"
+        onSubmit={handleSubmit}
+      >
+        <div className="form-floating">
+          <input
+            className="form-control readable"
+            style={{
+              color: "white",
+              fontSize: "x-large",
+              border: "2px solid white",
+              backgroundColor: "rgba(0,0,0,0)",
+            }}
+            id="roomId"
+            type="text"
+            value={room}
+            placeholder="Room ID"
+            onChange={(e) => setRoom(e.target.value.toUpperCase())}
+          />
+          <label htmlFor="roomId">Enter Room ID</label>
+        </div>
+        <input className="btn mt-3" type="submit" value="Join Game" />
       </form>
     </div>
   )

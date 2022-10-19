@@ -1,11 +1,12 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useState, useEffect } from "react"
-import { Routes, Route, NavLink, useNavigate } from "react-router-dom"
+import React, { useState } from "react"
+import { Routes, Route, useNavigate } from "react-router-dom"
 import HostPage from "./views/HostPage"
 import Welcome from "./views/Welcome"
 import Game from "./views/Game"
 import Lobby from "./views/Lobby"
+import YouWin from "./views/YouWin"
 import GameOver from "./views/GameOver"
 import Calamari from "./assets/calamari.png"
 
@@ -18,10 +19,6 @@ function App({ socket }) {
   const hostId = "1"
   const navigate = useNavigate()
 
-  // useEffect(() => {
-  //   socket.emit("player-list", players)
-  // }, [players])
-
   socket.on("join-confirmation", (data) => {
     setPlayerId(data.playerId)
     setPlayerName(data.playerName)
@@ -31,24 +28,15 @@ function App({ socket }) {
     setGameName(gameName)
     navigate("/lobby")
   })
-  socket.on("add-player", (player) => {
-    setPlayers({
-      ...players,
-      [player.id]: player.name,
-    })
+  socket.on("sync-players", (players) => {
+    setPlayers(players)
   })
-  socket.on("remove-player", (playerId) => {
-    let newPlayers = { ...players }
-    delete newPlayers[playerId]
-    setPlayers(newPlayers)
-  })
-  // socket.on("player-list", (newPlayers) => {
-  //   if (players !== newPlayers) {
-  //     setPlayers(newPlayers)
-  //   }
-  // })
   socket.on("redirect", (destination) => {
     navigate(destination)
+  })
+  socket.on("you-win", () => {
+    navigate("/congratulations")
+    socket.disconnect()
   })
   socket.on("game-over", () => {
     navigate("/gameover")
@@ -56,14 +44,6 @@ function App({ socket }) {
   })
   return (
     <div className="App">
-      {/* <div className="d-flex">
-        <div className="me-3">
-          <NavLink to={"/"}>Welcome</NavLink>
-        </div>
-        <div className="me-3">
-          <NavLink to={"/host"}>Host</NavLink>
-        </div>
-      </div> */}
       <Routes>
         <Route path="/" element={<Welcome socket={socket} />} />
         <Route path="/host" element={<HostPage socket={socket} />} />
@@ -88,6 +68,10 @@ function App({ socket }) {
         <Route
           path="/gameover"
           element={<GameOver playerName={playerName} />}
+        />
+        <Route
+          path="/congratulations"
+          element={<YouWin playerName={playerName} />}
         />
       </Routes>
     </div>

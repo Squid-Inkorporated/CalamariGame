@@ -8,7 +8,11 @@ const HostButton = ({ socket }) => {
   }
   return (
     <div>
-      <a className="btn" href="#" onClick={handleClick}>
+      <a
+        className="btn position-absolute top-50 start-50 translate-middle"
+        href="#"
+        onClick={handleClick}
+      >
         Host Game
       </a>
     </div>
