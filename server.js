@@ -60,7 +60,7 @@ const eliminatedPlayers = {}
 let numPlayersFinished = 0
 let numPlayers = 0
 // let nextGame = "Red Light, Green Light"
-let nextGame = "Marbles"
+let nextGame = "Glass Bridge"
 let hostId = "1"
 
 // SOCKET LISTENERS

@@ -11,24 +11,24 @@ const Game = ({ socket, gameName, team }) => {
   const [timer, setTimer] = useState(15000)
   const [answer, setAnswer] = useState(false)
 
-  // useEffect(() => {
-  //   const myInterval = () => {
-  //     if (timer > 1000) {
-  //       setTimer((state) => state - 1000)
-  //     } else if (timer !== 0) {
-  //       setTimer(0)
-  //       socket.emit("answer", {
-  //         content: answer,
-  //         team,
-  //       })
-  //       clearInterval(interval)
-  //     }
-  //   }
-  //   const interval = setInterval(myInterval, 1000)
-  //   return () => {
-  //     clearInterval(interval)
-  //   }
-  // }, [timer])
+  useEffect(() => {
+    const myInterval = () => {
+      if (timer > 1000) {
+        setTimer((state) => state - 1000)
+      } else if (timer !== 0) {
+        setTimer(0)
+        socket.emit("answer", {
+          content: answer,
+          team,
+        })
+        clearInterval(interval)
+      }
+    }
+    const interval = setInterval(myInterval, 1000)
+    return () => {
+      clearInterval(interval)
+    }
+  }, [timer])
 
   return (
     <div>
