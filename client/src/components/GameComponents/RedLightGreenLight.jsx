@@ -61,7 +61,7 @@ const RedLightGreenLight = ({ setAnswer }) => {
       {succeeded ? (
         <p>Great job! You survived this round...</p>
       ) : (
-        <button className="btn" onClick={handleClick}>
+        <button className="btn game-btn" onClick={handleClick}>
           Run!
         </button>
       )}

@@ -1,8 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState } from "react"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { solid } from "@fortawesome/fontawesome-svg-core/import.macro"
 import bridgeDeath from "../../assets/bridgeDeath.gif"
 
-const GlassBridge = ({ setAnswer }) => {
+const GlassBridge = ({ answer, setAnswer }) => {
   const [picked1, setPicked1] = useState(false)
   const [picked2, setPicked2] = useState(false)
   const [picked3, setPicked3] = useState(false)
@@ -79,6 +81,7 @@ const GlassBridge = ({ setAnswer }) => {
       case "8":
         setAnswer(false)
         setFailed(true)
+        break
       default:
         return
     }
@@ -98,7 +101,6 @@ const GlassBridge = ({ setAnswer }) => {
                 style={{ right: "0" }}
                 className="position-absolute top-50 translate-middle-y"
               >
-                {/* <img className="playerImg" src={Player} alt="player icon" /> */}
                 <h3 className="m-3 squidGreen">You Survived!</h3>
               </div>
             )}
@@ -117,7 +119,9 @@ const GlassBridge = ({ setAnswer }) => {
                   }
                 >
                   {picked1 && (
-                    <i className="display-1 fa-solid fa-shoe-prints"></i>
+                    <div className="display-1">
+                      <FontAwesomeIcon icon={solid("shoe-prints")} />
+                    </div>
                   )}
                   {clickMe1 ? "Click one Of Us" : ""}
                 </button>
@@ -137,7 +141,9 @@ const GlassBridge = ({ setAnswer }) => {
                 >
                   {clickMe3 ? "Click one Of Us" : ""}
                   {picked3 && (
-                    <i className="display-1 fa-solid fa-shoe-prints"></i>
+                    <div className="display-1">
+                      <FontAwesomeIcon icon={solid("shoe-prints")} />
+                    </div>
                   )}
                 </button>
               </div>
@@ -151,7 +157,9 @@ const GlassBridge = ({ setAnswer }) => {
                 >
                   {clickMe5 ? "Click one Of Us" : ""}
                   {picked5 && (
-                    <i className="display-1 fa-solid fa-skull-crossbones"></i>
+                    <div className="display-1">
+                      <FontAwesomeIcon icon={solid("skull-crossbones")} />
+                    </div>
                   )}
                 </button>
               </div>
@@ -169,7 +177,9 @@ const GlassBridge = ({ setAnswer }) => {
                 >
                   {clickMe7 ? "Click one Of Us" : ""}
                   {picked7 && (
-                    <i className="display-1 fa-solid fa-shoe-prints"></i>
+                    <div className="display-1">
+                      <FontAwesomeIcon icon={solid("shoe-prints")} />
+                    </div>
                   )}
                 </button>
               </div>
@@ -186,7 +196,9 @@ const GlassBridge = ({ setAnswer }) => {
                 >
                   {clickMe2 ? "Click one Of Us" : ""}
                   {picked2 && (
-                    <i className="display-1 fa-solid fa-skull-crossbones"></i>
+                    <div className="display-1">
+                      <FontAwesomeIcon icon={solid("skull-crossbones")} />
+                    </div>
                   )}
                 </button>
               </div>
@@ -199,7 +211,9 @@ const GlassBridge = ({ setAnswer }) => {
                 >
                   {clickMe4 ? "Click one Of Us" : ""}
                   {picked4 && (
-                    <i className="display-1 fa-solid fa-skull-crossbones"></i>
+                    <div className="display-1">
+                      <FontAwesomeIcon icon={solid("skull-crossbones")} />
+                    </div>
                   )}
                 </button>
               </div>
@@ -217,7 +231,9 @@ const GlassBridge = ({ setAnswer }) => {
                 >
                   {clickMe6 ? "Click one Of Us" : ""}
                   {picked6 && (
-                    <i className="display-1 fa-solid fa-shoe-prints"></i>
+                    <div className="display-1">
+                      <FontAwesomeIcon icon={solid("shoe-prints")} />
+                    </div>
                   )}
                 </button>
               </div>
@@ -235,7 +251,9 @@ const GlassBridge = ({ setAnswer }) => {
                 >
                   {clickMe8 ? "Click one Of Us" : ""}
                   {picked7 && (
-                    <i className="display-1 fa-solid fa-skull-crossbones"></i>
+                    <div className="display-1">
+                      <FontAwesomeIcon icon={solid("skull-crossbones")} />
+                    </div>
                   )}
                 </button>
               </div>

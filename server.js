@@ -50,7 +50,7 @@ const gameList = [
   "Marbles",
   "Trivia 2",
   "Trivia",
-  // "Glass Bridge",
+  "Glass Bridge",
   // "The Popular Thing",
   "Tug of War",
 ]
@@ -59,7 +59,8 @@ const players = {}
 const eliminatedPlayers = {}
 let numPlayersFinished = 0
 let numPlayers = 0
-let nextGame = "Red Light, Green Light"
+// let nextGame = "Red Light, Green Light"
+let nextGame = "Glass Bridge"
 let hostId = "1"
 
 // SOCKET LISTENERS
