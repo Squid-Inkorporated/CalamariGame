@@ -38,6 +38,12 @@ body {
   cursor: url('../public/doll.png'), auto !important;
 }
 
+.btn-hide {
+  background-color: #000000;
+  color: #000000;
+  border: 1px solid white;
+}
+
 .readable {
   font-family: Arial, Helvetica, sans-serif;
   /* color: #77b300;
