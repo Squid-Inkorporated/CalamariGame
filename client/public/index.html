@@ -24,16 +24,16 @@
     const music = new Audio('./squid-theme.mp3');
     function playMusic() {
       const myElement = document.getElementById("customSwitches");
-      if (myElement.innerText == 'on') {
-        myElement.innerText = 'off'
+      if (myElement.innerHTML == '<i class="fa-solid fa-volume-xmark"></i>') {
+        myElement.innerHTML = '<i class="fa-solid fa-volume-high"></i>'
         music.play();
-      } else {
-        myElement.innerText = 'on';
+      } else  {
+        myElement.innerHTML = '<i class="fa-solid fa-volume-xmark"></i>';
         music.pause();
       }
     } 
   </script>
-  <button onclick="playMusic()" class="custom-control-input" id="customSwitches">on</button>
+  <button onclick="playMusic()" class="custom-control-input" id="customSwitches"><i class="fa-solid fa-volume-xmark"></i></button>
 </body>
 
 </html>
