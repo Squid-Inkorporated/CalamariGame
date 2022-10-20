@@ -1,7 +1,6 @@
 import React from "react"
 import { Link } from "react-router-dom"
 import MoneyPig from "../assets/money-pig.png"
-import CalamariTitle from "../assets/calamari-title.png"
 
 const YouWin = () => {
   return (

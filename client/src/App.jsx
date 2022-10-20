@@ -8,14 +8,15 @@ import Game from "./views/Game"
 import Lobby from "./views/Lobby"
 import YouWin from "./views/YouWin"
 import GameOver from "./views/GameOver"
-import Calamari from "./assets/calamari.png"
 
 function App({ socket }) {
   const [playerId, setPlayerId] = useState(null)
   const [playerName, setPlayerName] = useState(null)
   const [roomId, setRoomId] = useState(null)
   const [players, setPlayers] = useState({})
+  const [eliminatedPlayers, setEliminatedPlayers] = useState({})
   const [gameName, setGameName] = useState(null)
+  const [team, setTeam] = useState(null)
   const hostId = "1"
   const navigate = useNavigate()
 
@@ -24,12 +25,14 @@ function App({ socket }) {
     setPlayerName(data.playerName)
     setRoomId(data.roomId)
   })
-  socket.on("to-lobby", (gameName) => {
+  socket.on("to-lobby", (gameName, team) => {
     setGameName(gameName)
+    setTeam(team)
     navigate("/lobby")
   })
-  socket.on("sync-players", (players) => {
+  socket.on("sync-players", (players, eliminatedPlayers) => {
     setPlayers(players)
+    setEliminatedPlayers(eliminatedPlayers)
   })
   socket.on("redirect", (destination) => {
     navigate(destination)
@@ -52,6 +55,7 @@ function App({ socket }) {
           element={
             <Lobby
               players={players}
+              eliminatedPlayers={eliminatedPlayers}
               playerName={playerName}
               roomId={roomId}
               playerId={playerId}
@@ -63,7 +67,7 @@ function App({ socket }) {
         />
         <Route
           path="/game"
-          element={<Game gameName={gameName} socket={socket} />}
+          element={<Game gameName={gameName} socket={socket} team={team} />}
         />
         <Route
           path="/gameover"

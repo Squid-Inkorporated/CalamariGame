@@ -1,28 +1,32 @@
-import React from 'react'
+import React from "react"
+import { motion } from "framer-motion"
 
-
-const Ball = ({animation}) => {
-
-  const ballStyles = {
-    backgroundImage: "linear-gradient(-225deg, #231557 0%, #44107A 29%, #FF1361 67%, #FFF800 100%)",
-    height: '100px',
-    width: '100px',
-    borderRadius: "50%",
-    position: "absolute",
-    top: "35%",
-    animation: `${animation} 5s forwards`
-  }
-
+const MoveBall = ({ playerMarble }) => {
   return (
-    <div style={ballStyles}></div>
-  )
-}
-
-const MoveBall = ({playerMarble}) => {
-  return (
-    <div> 
+    <div>
       <div>
-        <Ball animation={playerMarble < 50 ? "mymove1" : "mymove2"} />
+        <motion.div
+          className="position-absolute rounded-circle"
+          style={{
+            top: "40%",
+            height: "3rem",
+            width: "3rem",
+            backgroundImage:
+              "linear-gradient(-225deg, #231557 0%, #44107A 29%, #FF1361 67%, #FFF800 100%)",
+          }}
+          animate={
+            playerMarble > 50
+              ? {
+                  left: ["calc(5% + 0rem)", "calc(100% - 4rem)"],
+                  rotate: [0, 360],
+                }
+              : {
+                  left: ["calc(5% + 0rem)", "calc(50% - 3rem)"],
+                  rotate: [0, 360],
+                }
+          }
+          transition={{ duration: 2 }}
+        />
       </div>
     </div>
   )
