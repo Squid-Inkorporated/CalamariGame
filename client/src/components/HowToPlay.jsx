@@ -1,9 +1,11 @@
 import React from "react"
+import TugOfWar from "../assets/tug-of-war.png"
+import { motion } from "framer-motion"
 
 const HowToPlay = ({ gameName }) => {
   return (
     <div>
-      <div className="row justify-content-center">
+      <div className="row justify-content-center mx-1">
         <div className="col-lg-6 col-md-8 col-sm-10">
           <div className="card">
             <div className="card-body">
@@ -24,11 +26,48 @@ const HowToPlay = ({ gameName }) => {
                   <span className="text-danger"> possibly</span> live!
                 </p>
               )}
+              {gameName === "Marbles" && (
+                <div className="position-relative">
+                  <p className="mb-0">
+                    Click the button to toss a marble with random velocity.
+                  </p>
+                  <div style={{ height: "3rem" }}></div>
+                  <motion.div
+                    className="position-absolute bottom-0 rounded-circle"
+                    style={{
+                      height: "3rem",
+                      width: "3rem",
+                      backgroundImage:
+                        "linear-gradient(-225deg, #231557 0%, #44107A 29%, #FF1361 67%, #FFF800 100%)",
+                    }}
+                    initial={{ left: "0%" }}
+                    animate={{
+                      left: [
+                        "calc(0% - 0rem)",
+                        "calc(100% - 3rem)",
+                        "calc(0% - 0rem)",
+                      ],
+                      rotate: [0, 360, 0],
+                    }}
+                    transition={{ repeat: Infinity, duration: 4 }}
+                  />
+                </div>
+              )}
               {gameName === "The Popular Thing" && (
                 <p className="mb-0">
                   Pick your favorite thing from the provided options. Those who
                   choose the least popular option will be eliminated.
                 </p>
+              )}
+              {gameName === "Tug of War" && (
+                <div>
+                  <p className="mb-0">
+                    Tap tap tap for your life! You have been divided into two
+                    teams, and the team who taps the button the most times will
+                    be spared. As for the rest...
+                  </p>
+                  <img className="w-100" src={TugOfWar} alt="Tug of War" />
+                </div>
               )}
               {gameName === "Red Light, Green Light" && (
                 <p className="mb-0">
@@ -40,7 +79,7 @@ const HowToPlay = ({ gameName }) => {
                   light!
                 </p>
               )}
-              {gameName === "GlassBridge" && (
+              {gameName === "Glass Bridge" && (
                 <p className="mb-0">
                   Start from LEFT to RIGHT. Pick the right tile and try not to
                   fall.
