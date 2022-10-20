@@ -10,8 +10,10 @@ const players = {}
 const playedGames = []
 const gameList = [
   "Marbles",
+  "Trivia ",
   "Trivia 2",
-  "Trivia",
+  "Trivia 3",
+  "Glass Bridge"
   // "The Popular Thing",
   // "Tug of War"
 ]
