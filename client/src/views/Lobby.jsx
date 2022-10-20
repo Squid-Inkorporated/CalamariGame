@@ -8,6 +8,7 @@ const Lobby = ({
   hostId,
   roomId,
   players,
+  eliminatedPlayers,
   gameName,
   playerName,
 }) => {
@@ -17,13 +18,11 @@ const Lobby = ({
 
   return (
     <div>
-      <h1>{gameName}</h1>
+      <h1 className="mt-2">{gameName}</h1>
       <HowToPlay gameName={gameName} />
-      <div className="row mt-3">
+      <div className="row mt-3 align-items-start">
         <div className="col-12 col-md-6 col-lg-6">
           <h4>Players in Lobby:</h4>
-        </div>
-        <div className="col-12 col-md-6 col-lg-6">
           <ul>
             {players &&
               Object.keys(players).map((id) => {
@@ -33,6 +32,21 @@ const Lobby = ({
                   </li>
                 ) : (
                   <li key={id}>{players[id]}</li>
+                )
+              })}
+          </ul>
+        </div>
+        <div className="col-12 col-md-6 col-lg-6">
+          <h4>Eliminated:</h4>
+          <ul>
+            {eliminatedPlayers &&
+              Object.keys(eliminatedPlayers).map((id) => {
+                return eliminatedPlayers[id] === playerName ? (
+                  <li className="squidGreen" key={id}>
+                    {eliminatedPlayers[id] + " (You)"}
+                  </li>
+                ) : (
+                  <li key={id}>{eliminatedPlayers[id]}</li>
                 )
               })}
           </ul>

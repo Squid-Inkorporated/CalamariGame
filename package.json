@@ -4,6 +4,7 @@
     "@fortawesome/free-solid-svg-icons": "^6.2.0",
     "@fortawesome/react-fontawesome": "^0.2.0",
     "@socket.io/admin-ui": "^0.5.1",
+    "react-howler": "^5.2.0",
     "socket.io": "^4.5.2"
   },
   "scripts": {

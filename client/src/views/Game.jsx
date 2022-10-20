@@ -1,38 +1,38 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react"
-import Trivia from "../components/Trivia"
-import Trivia2 from "../components/Trivia2"
-import RedLightGreenLight from "../components/RedLightGreenLight"
-import TugOfWar from "../components/TugOfWar"
-import Marbles from "../components/Marbles"
-import GlassBridge from "../components/GlassBridge"
+import Trivia from "../components/GameComponents/Trivia"
+import Trivia2 from "../components/GameComponents/Trivia2"
+import RedLightGreenLight from "../components/GameComponents/RedLightGreenLight"
+import TugOfWar from "../components/GameComponents/TugOfWar"
+import Marbles from "../components/GameComponents/Marbles"
+import GlassBridge from "../components/GameComponents/GlassBridge"
 
-const Game = ({ socket, gameName }) => {
+const Game = ({ socket, gameName, team }) => {
   const [timer, setTimer] = useState(15000)
   const [answer, setAnswer] = useState(false)
 
-  useEffect(() => {
-    const myInterval = () => {
-      if (timer > 1000) {
-        setTimer((state) => state - 1000)
-      } else if (timer !== 0) {
-        setTimer(0)
-        socket.emit("answer", {
-          content: answer,
-          team: null,
-        })
-        clearInterval(interval)
-      }
-    }
-    const interval = setInterval(myInterval, 1000)
-    return () => {
-      clearInterval(interval)
-    }
-  }, [timer])
+  // useEffect(() => {
+  //   const myInterval = () => {
+  //     if (timer > 1000) {
+  //       setTimer((state) => state - 1000)
+  //     } else if (timer !== 0) {
+  //       setTimer(0)
+  //       socket.emit("answer", {
+  //         content: answer,
+  //         team,
+  //       })
+  //       clearInterval(interval)
+  //     }
+  //   }
+  //   const interval = setInterval(myInterval, 1000)
+  //   return () => {
+  //     clearInterval(interval)
+  //   }
+  // }, [timer])
 
   return (
     <div>
-      <h2>
+      <h2 className="mt-2">
         {gameName === "Trivia" ||
         gameName === "Trivia 2" ||
         gameName === "Trivia 3"
@@ -57,7 +57,7 @@ const Game = ({ socket, gameName }) => {
       {gameName === "Glass Bridge" && (
         <GlassBridge setAnswer={setAnswer} answer={answer} />
       )}
-      <div className="display-1 position-absolute bottom-0 start-50 translate-middle-x">
+      <div className="display-1 position-absolute bottom-0 start-50 translate-middle-x pb-5">
         {timer.toString().slice(0, -3)}
       </div>
     </div>
