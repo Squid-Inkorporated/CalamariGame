@@ -5,7 +5,7 @@ const INDEX = "/client/public/index.html"
 
 const server = express()
   .use(express.static(path.join(__dirname, "build")))
-  .get("/*", function (req, res) {
+  .get("/", function (req, res) {
     res.sendFile(path.join(__dirname, "build", "index.html"))
   })
   .listen(PORT, () => console.log(`Listening on ${PORT}`))
