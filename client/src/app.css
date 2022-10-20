@@ -133,3 +133,16 @@ body {
 .gameOver {
   background-image: url("./assets/rip_squid.png");
 }
+
+/* audio btn */
+#customSwitches {
+  max-width: fit-content;
+  height: 34px;
+  position: absolute;
+  right: 1%;
+  top: 5%;
+  border-radius: 11px;
+  background-color: black;
+  color:white;
+  border: none;
+}
