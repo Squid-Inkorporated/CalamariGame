@@ -1,9 +1,13 @@
 const express = require("express")
+const path = require("path")
 const PORT = process.env.PORT || 3001
-const INDEX = "/client/build/index.html"
+const INDEX = "/client/public/index.html"
 
 const server = express()
-  .use((req, res) => res.sendFile(INDEX, { root: __dirname }))
+  .use(express.static(path.join(__dirname, "build")))
+  .get("/*", function (req, res) {
+    res.sendFile(path.join(__dirname, "build", "index.html"))
+  })
   .listen(PORT, () => console.log(`Listening on ${PORT}`))
 
 const io = require("socket.io")(server, {
@@ -73,6 +77,7 @@ let hostId = "1"
 
 // SOCKET LISTENERS
 io.on("connection", (socket) => {
+  console.log("Client connected")
   socket.on("host", () => {
     socket.join("1")
     socket.join(socket.id)
