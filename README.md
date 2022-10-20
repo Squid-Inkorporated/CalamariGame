@@ -1,4 +1,4 @@
-![calamari_game](https://user-images.githubusercontent.com/34342007/196797228-536ae030-1c0a-4ecc-89b8-7dcb45308053.png)
+![calamari_game](client/src/assets/calamari-title.png)
 
 
 
