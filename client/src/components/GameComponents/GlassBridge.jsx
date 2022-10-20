@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState } from "react"
-import bridgeDeath from "../assets/bridgeDeath.gif"
+import bridgeDeath from "../../assets/bridgeDeath.gif"
 
 const GlassBridge = ({ setAnswer }) => {
   const [picked1, setPicked1] = useState(false)
