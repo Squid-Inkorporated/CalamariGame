@@ -27,7 +27,7 @@ const RedLightGreenLight = ({ setAnswer }) => {
   }, [timer])
 
   useEffect(() => {
-    if (count >= 25) {
+    if (count >= 30) {
       setSucceeded(true)
       setAnswer(true)
     }
@@ -57,7 +57,7 @@ const RedLightGreenLight = ({ setAnswer }) => {
         ></div>
       </div>
       {failed ? <p>Yikes! You got GOT! Better luck next time.</p> : <p> </p>}
-      <p>{count}</p>
+      <p className="squidGreen h2">{count}</p>
       {succeeded ? (
         <p>Great job! You survived this round...</p>
       ) : (

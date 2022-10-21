@@ -53,8 +53,14 @@ const Trivia2 = ({ setAnswer }) => {
           <button
             style={
               picked1
-                ? { backgroundColor: "#ed1b76", border: "#ed1b76 none" }
-                : { borderRadius: "20px" }
+                ? {
+                    backgroundColor: "#588300",
+                    border: "10px solid #689c00",
+                  }
+                : {
+                    backgroundColor: "#77b300",
+                    border: "10px solid #689c00",
+                  }
             }
             id="1"
             className="btn btn-success game-btn w-100"
@@ -67,8 +73,14 @@ const Trivia2 = ({ setAnswer }) => {
           <button
             style={
               picked2
-                ? { backgroundColor: "#ed1b76", border: "#ed1b76 none" }
-                : { borderRadius: "20px" }
+                ? {
+                    backgroundColor: "rgb(132, 0, 0)",
+                    border: "10px solid rgb(155, 0, 0)",
+                  }
+                : {
+                    backgroundColor: "#c00",
+                    border: "10px solid rgb(155, 0, 0)",
+                  }
             }
             id="2"
             className="btn btn-danger game-btn w-100"
@@ -81,8 +93,14 @@ const Trivia2 = ({ setAnswer }) => {
           <button
             style={
               picked3
-                ? { backgroundColor: "#ed1b76", border: "#ed1b76 none" }
-                : { borderRadius: "20px" }
+                ? {
+                    backgroundColor: "rgb(155, 83, 0)",
+                    border: "10px solid rgb(217, 116, 0)",
+                  }
+                : {
+                    backgroundColor: "#f80",
+                    border: "10px solid rgb(217, 116, 0)",
+                  }
             }
             id="3"
             className="btn btn-warning game-btn w-100"
@@ -95,8 +113,14 @@ const Trivia2 = ({ setAnswer }) => {
           <button
             style={
               picked4
-                ? { backgroundColor: "#ed1b76", border: "#ed1b76 none" }
-                : { borderRadius: "20px" }
+                ? {
+                    backgroundColor: "rgb(106, 35, 142)",
+                    border: "10px solid rgb(127, 42, 170)",
+                  }
+                : {
+                    backgroundColor: "#93c",
+                    border: "10px solid rgb(127, 42, 170)",
+                  }
             }
             id="4"
             className="btn btn-info game-btn w-100"

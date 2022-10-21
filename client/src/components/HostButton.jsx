@@ -9,8 +9,8 @@ const HostButton = ({ socket }) => {
   return (
     <div>
       <a
-        style={{ bottom: 100 }}
-        className="btn position-absolute start-50 translate-middle"
+        style={{ bottom: 0 }}
+        className="btn host-btn position-absolute start-50 translate-middle"
         href="#"
         onClick={handleClick}
       >

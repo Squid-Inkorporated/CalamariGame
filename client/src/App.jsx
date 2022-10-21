@@ -17,6 +17,7 @@ function App({ socket }) {
   const [eliminatedPlayers, setEliminatedPlayers] = useState({})
   const [gameName, setGameName] = useState(null)
   const [team, setTeam] = useState(null)
+  const [gameOver, setGameOver] = useState(false)
   const hostId = "1"
   const navigate = useNavigate()
 
@@ -26,6 +27,9 @@ function App({ socket }) {
     setRoomId(data.roomId)
   })
   socket.on("to-lobby", (gameName, team) => {
+    if (gameOver) {
+      return
+    }
     setGameName(gameName)
     setTeam(team)
     navigate("/lobby")
@@ -35,15 +39,28 @@ function App({ socket }) {
     setEliminatedPlayers(eliminatedPlayers)
   })
   socket.on("redirect", (destination) => {
+    console.log("Game over --> " + gameOver)
+    if (gameOver) {
+      return
+    }
     navigate(destination)
   })
   socket.on("you-win", () => {
     navigate("/congratulations")
-    socket.disconnect()
+    // socket.disconnect()
   })
   socket.on("game-over", () => {
+    console.log(gameOver)
+    setGameOver(true)
+    console.log("Game over set to true")
     navigate("/gameover")
-    socket.disconnect()
+    // socket.disconnect()
+  })
+  socket.on("game-finished", () => {
+    if (gameOver) {
+      navigate("/")
+      setGameOver(false)
+    }
   })
   return (
     <div className="App">

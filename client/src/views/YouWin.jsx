@@ -19,7 +19,7 @@ const YouWin = ({ eliminatedPlayers }) => {
           })}
       </ul>
       <Link className="btn" to="/">
-        Again?
+        Play Again?
       </Link>
     </div>
   )

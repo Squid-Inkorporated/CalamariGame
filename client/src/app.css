@@ -44,6 +44,12 @@ body {
   border: 1px solid white;
 }
 
+.host-btn, .host-btn:hover {
+  background-color: #07080A !important;
+  color: #07080A !important;
+  border: none !important;
+}
+
 .readable {
   font-family: Arial, Helvetica, sans-serif;
   /* color: #77b300;

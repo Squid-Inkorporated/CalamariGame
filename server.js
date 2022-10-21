@@ -67,13 +67,12 @@ const gameList = [
   // "The Popular Thing",
   // "Tug of War",
 ]
-const playedGames = []
-const players = {}
-const eliminatedPlayers = {}
+let playedGames = []
+let players = {}
+let eliminatedPlayers = {}
 // let numPlayersFinished = 0
 // let numPlayers = 0
 let nextGame = "Red Light, Green Light"
-// let nextGame = "Glass Bridge"
 let hostId = "1"
 
 // SOCKET LISTENERS
@@ -113,20 +112,21 @@ io.on("connection", (socket) => {
   // TODO: FIX THE INFINITE LOOP
   socket.on("answer", (answer) => {
     evaluateSoloGame(answer, socket)
-    // if (!answer.team) {
-    // } else {
-    //   numPlayersFinished++
-    //   if (numPlayersFinished === numPlayers) {
-    //   }
-    // }
-    checkGameEnd()
   })
 
   socket.on("start-round", () => {
     // numPlayers = Object.keys(players).length
+    if (nextGame === "Red Light, Green Light") {
+      io.emit("redirect", "/game")
+    } else {
+      if (eliminatedPlayers.hasOwnProperty(socket.id)) {
+        io.to(socket.id).emit("redirect", "/gameover")
+      } else {
+        io.to(socket.id).emit("redirect", "/game")
+      }
+    }
     nextGame = pickGame(gameList, playedGames)
     console.log(nextGame)
-    io.emit("redirect", "/game")
   })
 })
 
@@ -146,7 +146,7 @@ function generateRoomId() {
 }
 
 const pickGame = (gameArray, playedGamesArray) => {
-  if (gameArray.length == playedGamesArray.length + 1) return null
+  if (gameArray.length == playedGamesArray.length) return null
   let pickedGame = gameArray[Math.floor(Math.random() * gameArray.length)]
   while (playedGamesArray.includes(pickedGame)) {
     pickedGame = gameArray[Math.floor(Math.random() * gameArray.length)]
@@ -165,14 +165,17 @@ function evaluateSoloGame(answer, socket) {
       console.log("You Win!")
       io.to(socket.id).emit("you-win")
       delete players[socket.id]
-      console.log("Players -->", players)
       playerSync()
+      gameEnd()
     } else {
       sendToLobby(socket.id)
     }
   } else {
     io.to(socket.id).emit("game-over")
     eliminatePlayer(socket)
+    if (!Object.keys(players).length) {
+      gameEnd()
+    }
     playerSync()
   }
 }
@@ -187,9 +190,13 @@ function playerSync() {
   io.emit("sync-players", players, eliminatedPlayers)
 }
 
-function checkGameEnd() {
-  if (players == {}) {
-    playedGames = []
-    console.log("The Calamari Game has concluded.")
-  }
+function gameEnd() {
+  console.log(players)
+  eliminatedPlayers = {}
+  playedGames = []
+  nextGame = "Red Light, Green Light"
+  console.log("The Calamari Game has concluded.")
+  setTimeout(() => {
+    io.emit("game-finished")
+  }, 5000)
 }

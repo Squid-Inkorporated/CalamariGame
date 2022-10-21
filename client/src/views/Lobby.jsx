@@ -5,8 +5,8 @@ import HowToPlay from "../components/HowToPlay"
 const Lobby = ({
   socket,
   playerId,
-  hostId,
   roomId,
+  hostId,
   players,
   eliminatedPlayers,
   gameName,
@@ -45,10 +45,17 @@ const Lobby = ({
           : gameName}
       </h1>
       <HowToPlay gameName={gameName} />
-      <div className="row mt-3 align-items-start">
-        <div className="col-12 col-md-6 col-lg-6">
+      <div className="row gap-3 mt-3 align-items-start p-5">
+        <div className="col-12 col-md-5 col-lg-5">
           <h4>Players in Lobby:</h4>
-          <ul>
+          <ul
+            style={{
+              maxHeight: "15vh",
+              overflowY: "scroll",
+              border: "2px solid white",
+              borderRadius: "0.5rem",
+            }}
+          >
             {players &&
               Object.keys(players).map((id) => {
                 return players[id] === playerName ? (
@@ -61,20 +68,29 @@ const Lobby = ({
               })}
           </ul>
         </div>
-        <div className="col-12 col-md-6 col-lg-6">
+        <div className="col-12 col-md-5 col-lg-5">
           <h4>Eliminated:</h4>
-          <ul>
-            {eliminatedPlayers &&
-              Object.keys(eliminatedPlayers).map((id) => {
-                return eliminatedPlayers[id] === playerName ? (
-                  <li className="squidGreen" key={id}>
-                    {eliminatedPlayers[id] + " (You)"}
-                  </li>
-                ) : (
-                  <li key={id}>{eliminatedPlayers[id]}</li>
-                )
-              })}
-          </ul>
+          {Object.keys(eliminatedPlayers).length !== 0 && (
+            <ul
+              style={{
+                maxHeight: "20vh",
+                overflow: "scroll",
+                border: "2px solid white",
+                borderRadius: "0.5rem",
+              }}
+            >
+              {eliminatedPlayers &&
+                Object.keys(eliminatedPlayers).map((id) => {
+                  return eliminatedPlayers[id] === playerName ? (
+                    <li className="squidGreen" key={id}>
+                      {eliminatedPlayers[id] + " (You)"}
+                    </li>
+                  ) : (
+                    <li key={id}>{eliminatedPlayers[id]}</li>
+                  )
+                })}
+            </ul>
+          )}
         </div>
       </div>
       <div
@@ -83,16 +99,22 @@ const Lobby = ({
       >
         {gameName === "Red Light, Green Light" &&
           (playerId === hostId ? (
-            <button className="btn" onClick={handleClick}>
-              Start
-            </button>
+            <div className="position-absolute bottom-0 start-50 translate-middle-x">
+              <h1 className="readable">Room: {roomId}</h1>
+              <button className="btn" onClick={handleClick}>
+                Start
+              </button>
+            </div>
           ) : (
-            <p className="mt-3">Waiting for host to start the game...</p>
+            <div className="position-absolute bottom-0 start-50 translate-middle-x">
+              <h1 className="readable">Room: {roomId}</h1>
+              <p style={{ minWidth: "50vw" }} className="mb-0">
+                Waiting for host to start the game...
+              </p>
+            </div>
           ))}
       </div>
-      {/* <h1 className="readable position-absolute bottom-0 start-50 translate-middle-x">
-        Room: {roomId}
-      </h1> */}
+
       <CalamariShapes />
       <div
         style={{ bottom: "10%" }}
