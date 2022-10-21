@@ -37,7 +37,13 @@ const Lobby = ({
 
   return (
     <div>
-      <h1 className="mt-2">{gameName}</h1>
+      <h1 className="mt-2">
+        {gameName === "Trivia" ||
+        gameName === "Trivia 2" ||
+        gameName === "Trivia 3"
+          ? "Trivia"
+          : gameName}
+      </h1>
       <HowToPlay gameName={gameName} />
       <div className="row mt-3 align-items-start">
         <div className="col-12 col-md-6 col-lg-6">
@@ -72,7 +78,7 @@ const Lobby = ({
         </div>
       </div>
       <div
-        style={{ bottom: "10rem" }}
+        style={{ bottom: "2rem" }}
         className="position-absolute start-50 translate-middle-x"
       >
         {gameName === "Red Light, Green Light" &&
@@ -84,9 +90,9 @@ const Lobby = ({
             <p className="mt-3">Waiting for host to start the game...</p>
           ))}
       </div>
-      <h1 className="readable position-absolute bottom-0 start-50 translate-middle-x">
+      {/* <h1 className="readable position-absolute bottom-0 start-50 translate-middle-x">
         Room: {roomId}
-      </h1>
+      </h1> */}
       <CalamariShapes />
       <div
         style={{ bottom: "10%" }}

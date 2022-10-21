@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.47878fa8.css",
-    "main.js": "/static/js/main.78b48956.js",
+    "main.js": "/static/js/main.31deb83e.js",
     "static/js/787.c4e7f8f9.chunk.js": "/static/js/787.c4e7f8f9.chunk.js",
     "static/media/bridgeDeath.gif": "/static/media/bridgeDeath.9854f47d2194549661c2.gif",
     "static/media/rip_squid.png": "/static/media/rip_squid.fc1e7ce065f6fb747557.png",
@@ -12,11 +12,11 @@
     "static/media/Game Of Squids.otf": "/static/media/Game Of Squids.9113ca56034cfbd7fad5.otf",
     "index.html": "/index.html",
     "main.47878fa8.css.map": "/static/css/main.47878fa8.css.map",
-    "main.78b48956.js.map": "/static/js/main.78b48956.js.map",
+    "main.31deb83e.js.map": "/static/js/main.31deb83e.js.map",
     "787.c4e7f8f9.chunk.js.map": "/static/js/787.c4e7f8f9.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.47878fa8.css",
-    "static/js/main.78b48956.js"
+    "static/js/main.31deb83e.js"
   ]
 }

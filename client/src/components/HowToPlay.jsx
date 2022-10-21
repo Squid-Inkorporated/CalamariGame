@@ -3,7 +3,7 @@ import TugOfWar from "../assets/tug-of-war.png"
 import { motion } from "framer-motion"
 
 const HowToPlay = ({ gameName }) => {
-  const [timer, setTimer] = useState(5000)
+  const [timer, setTimer] = useState(4500)
   const [color, setColor] = useState("green")
   useEffect(() => {
     const myInterval = () => {
@@ -12,7 +12,7 @@ const HowToPlay = ({ gameName }) => {
       if (timer > 0) {
         setTimer((state) => state - 500)
       } else {
-        setTimer(5000)
+        setTimer(4500)
         setColor("green")
         clearInterval(interval)
       }
@@ -86,7 +86,7 @@ const HowToPlay = ({ gameName }) => {
               {gameName === "Red Light, Green Light" && (
                 <div className="d-flex">
                   <p className="mb-0">
-                    Run for your life! Tap the button and reach 25 within 15
+                    Run for your life! Tap the button and reach 30 within 15
                     seconds. The light will change from{" "}
                     <span style={{ color: "green" }}>green</span> to{" "}
                     <span style={{ color: "yellow" }}>yellow</span> to{" "}
