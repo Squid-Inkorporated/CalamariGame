@@ -13,7 +13,7 @@ const Marbles = ({ setAnswer }) => {
   const [visible, setVisible] = useState(true)
   const handleClick = () => {
     // if marble is over 50, send true else send false
-    setPlayerMarble(Math.floor(Math.random() * 101))
+    setPlayerMarble(Math.floor(Math.random() * 151))
     setVisible((prev) => !prev)
   }
 

@@ -75,7 +75,12 @@ function App({ socket }) {
         />
         <Route
           path="/congratulations"
-          element={<YouWin playerName={playerName} />}
+          element={
+            <YouWin
+              playerName={playerName}
+              eliminatedPlayers={eliminatedPlayers}
+            />
+          }
         />
       </Routes>
     </div>

@@ -6,11 +6,11 @@ import HostButton from "../components/HostButton"
 const Welcome = ({ socket }) => {
   return (
     <>
-      <h2>
+      <h2 className="text-white">
         <span style={{ color: "#ed1b76" }} className="display-1 me-3">
           &#125;
         </span>
-        Welcome to the Calamari Game.
+        Welcome to the Calamari Game
         <span style={{ color: "#ed1b76" }} className="display-1 ms-3">
           &#123;
         </span>

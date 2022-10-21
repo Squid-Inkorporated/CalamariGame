@@ -64,39 +64,6 @@ body {
   color: #249f9c;
 }
 
-/* you lose */
-@keyframes mymove1 {
-  0% {
-    bottom: 30%;
-    left: 10%;
-  }
-  50% {
-    bottom: 30%;
-    left: calc(50% - 100px);
-  }
-  100% {
-    bottom: 30%;
-    left: calc(50% - 100px);
-  }
-}
-
-/* you win */
-
-@keyframes mymove2 {
-  0% {
-    bottom: 30%;
-    left: 10%;
-  }
-  50% {
-    bottom: 30%;
-    left: calc(90% - 100px);
-  }
-  100% {
-    bottom: 30%;
-    left: calc(90% - 100px);
-  }
-}
-
 .guard {
   width: 17%;
   margin-left: 1rem;
@@ -109,11 +76,12 @@ body {
 
 .card {
   background-image: linear-gradient(to top, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.2) 100%);
+  background-color: none;
 }
 
 .bridgeTile {
-  width: calc(100vh/4);
-  height: calc(100vh/4);
+  width: calc(100vh/4 - 4rem);
+  height: calc(100vh/4 - 4rem);
   margin: 0;
   border: solid 5px black;
   backdrop-filter: blur(5px);

@@ -27,7 +27,7 @@ const RedLightGreenLight = ({ setAnswer }) => {
   }, [timer])
 
   useEffect(() => {
-    if (count >= 50) {
+    if (count >= 25) {
       setSucceeded(true)
       setAnswer(true)
     }

@@ -95,169 +95,165 @@ const GlassBridge = ({ answer, setAnswer }) => {
           <p className="text-center readable" style={{ color: "white" }}>
             <i>Hint: Sacrifice some friends to survive this bridge.</i>
           </p>
-          <div className="row justify-content-center flex-lg-col flex-row position-relative">
-            {succeeded && (
-              <div
-                style={{ right: "0" }}
-                className="position-absolute top-50 translate-middle-y"
-              >
+          <div className="position-relative">
+            {succeeded ? (
+              <div className="position-absolute top-50 start-50 translate-middle-x">
                 <h3 className="m-3 squidGreen">You Survived!</h3>
+              </div>
+            ) : (
+              <div className="row justify-content-center flex-lg-column flex-xl-column flex-row position-relative">
+                <div className="d-flex justify-content-center align-items-end flex-lg-row flex-column p-0 col">
+                  {/* button 1 */}
+                  <div>
+                    <button
+                      id="1"
+                      onClick={clickMe1 ? handleClick : console.log("no")}
+                      className="bridgeTile"
+                      style={
+                        picked1
+                          ? { backgroundColor: "#ed1b76" }
+                          : { backgroundColor: "#grey" }
+                      }
+                    >
+                      {picked1 && (
+                        <div className="display-1">
+                          <FontAwesomeIcon icon={solid("shoe-prints")} />
+                        </div>
+                      )}
+                      {clickMe1 ? "Tap one of us" : ""}
+                    </button>
+                  </div>
+                  {/* button 3 */}
+                  <div>
+                    <button
+                      id="3"
+                      onClick={clickMe3 ? handleClick : console.log("no")}
+                      className="bridgeTile"
+                      style={
+                        picked3
+                          ? { backgroundColor: "#ed1b76" }
+                          : { backgroundColor: "#grey" }
+                      }
+                    >
+                      {clickMe3 ? "Tap one of us" : ""}
+                      {picked3 && (
+                        <div className="display-1">
+                          <FontAwesomeIcon icon={solid("shoe-prints")} />
+                        </div>
+                      )}
+                    </button>
+                  </div>
+                  {/* button 5 */}
+                  <div>
+                    <button
+                      id="5"
+                      onClick={clickMe5 ? handleClick : console.log("no")}
+                      className="bridgeTile "
+                    >
+                      {clickMe5 ? "Tap one of us" : ""}
+                      {picked5 && (
+                        <div className="display-1">
+                          <FontAwesomeIcon icon={solid("skull-crossbones")} />
+                        </div>
+                      )}
+                    </button>
+                  </div>
+                  {/* button 7 */}
+                  <div>
+                    <button
+                      id="7"
+                      onClick={clickMe7 ? handleClick : console.log("no")}
+                      className="bridgeTile"
+                      style={
+                        picked7
+                          ? { backgroundColor: "#ed1b76" }
+                          : { backgroundColor: "#grey" }
+                      }
+                    >
+                      {clickMe7 ? "Tap one of us" : ""}
+                      {picked7 && (
+                        <div className="display-1">
+                          <FontAwesomeIcon icon={solid("shoe-prints")} />
+                        </div>
+                      )}
+                    </button>
+                  </div>
+                </div>
+                <div className="d-flex justify-content-center align-items-start flex-lg-row flex-column p-0 col">
+                  {/* button 2 */}
+                  <div>
+                    <button
+                      id="2"
+                      onClick={clickMe2 ? handleClick : console.log("no")}
+                      className="bridgeTile"
+                    >
+                      {clickMe2 ? "Tap one of us" : ""}
+                      {picked2 && (
+                        <div className="display-1">
+                          <FontAwesomeIcon icon={solid("skull-crossbones")} />
+                        </div>
+                      )}
+                    </button>
+                  </div>
+                  {/* button 4 */}
+                  <div>
+                    <button
+                      id="4"
+                      onClick={clickMe4 ? handleClick : console.log("no")}
+                      className="bridgeTile"
+                    >
+                      {clickMe4 ? "Tap one of us" : ""}
+                      {picked4 && (
+                        <div className="display-1">
+                          <FontAwesomeIcon icon={solid("skull-crossbones")} />
+                        </div>
+                      )}
+                    </button>
+                  </div>
+                  {/* button 6 */}
+                  <div>
+                    <button
+                      id="6"
+                      onClick={clickMe6 ? handleClick : console.log("no")}
+                      className="bridgeTile"
+                      style={
+                        picked6
+                          ? { backgroundColor: "#ed1b76" }
+                          : { backgroundColor: "#grey" }
+                      }
+                    >
+                      {clickMe6 ? "Tap one of us" : ""}
+                      {picked6 && (
+                        <div className="display-1">
+                          <FontAwesomeIcon icon={solid("shoe-prints")} />
+                        </div>
+                      )}
+                    </button>
+                  </div>
+                  {/* button 8 */}
+                  <div>
+                    <button
+                      id="8"
+                      onClick={clickMe8 ? handleClick : console.log("no")}
+                      className="bridgeTile"
+                      style={
+                        picked8
+                          ? { backgroundColor: "#ed1b76" }
+                          : { backgroundColor: "#grey" }
+                      }
+                    >
+                      {clickMe8 ? "Tap one of us" : ""}
+                      {picked7 && (
+                        <div className="display-1">
+                          <FontAwesomeIcon icon={solid("skull-crossbones")} />
+                        </div>
+                      )}
+                    </button>
+                  </div>
+                </div>
               </div>
             )}
             {/* top row */}
-            <div className="d-flex justify-content-center flex-lg-row flex-column col">
-              {/* button 1 */}
-              <div>
-                <button
-                  id="1"
-                  onClick={clickMe1 ? handleClick : console.log("no")}
-                  className="bridgeTile"
-                  style={
-                    picked1
-                      ? { backgroundColor: "#ed1b76" }
-                      : { backgroundColor: "#grey" }
-                  }
-                >
-                  {picked1 && (
-                    <div className="display-1">
-                      <FontAwesomeIcon icon={solid("shoe-prints")} />
-                    </div>
-                  )}
-                  {clickMe1 ? "Click one Of Us" : ""}
-                </button>
-              </div>
-
-              {/* button 3 */}
-              <div>
-                <button
-                  id="3"
-                  onClick={clickMe3 ? handleClick : console.log("no")}
-                  className="bridgeTile"
-                  style={
-                    picked3
-                      ? { backgroundColor: "#ed1b76" }
-                      : { backgroundColor: "#grey" }
-                  }
-                >
-                  {clickMe3 ? "Click one Of Us" : ""}
-                  {picked3 && (
-                    <div className="display-1">
-                      <FontAwesomeIcon icon={solid("shoe-prints")} />
-                    </div>
-                  )}
-                </button>
-              </div>
-
-              {/* button 5 */}
-              <div>
-                <button
-                  id="5"
-                  onClick={clickMe5 ? handleClick : console.log("no")}
-                  className="bridgeTile "
-                >
-                  {clickMe5 ? "Click one Of Us" : ""}
-                  {picked5 && (
-                    <div className="display-1">
-                      <FontAwesomeIcon icon={solid("skull-crossbones")} />
-                    </div>
-                  )}
-                </button>
-              </div>
-              {/* button 7 */}
-              <div>
-                <button
-                  id="7"
-                  onClick={clickMe7 ? handleClick : console.log("no")}
-                  className="bridgeTile"
-                  style={
-                    picked7
-                      ? { backgroundColor: "#ed1b76" }
-                      : { backgroundColor: "#grey" }
-                  }
-                >
-                  {clickMe7 ? "Click one Of Us" : ""}
-                  {picked7 && (
-                    <div className="display-1">
-                      <FontAwesomeIcon icon={solid("shoe-prints")} />
-                    </div>
-                  )}
-                </button>
-              </div>
-            </div>
-
-            {/* bottom row */}
-            {/* button 2 */}
-            <div className="d-flex justify-content-center flex-lg-row flex-column col">
-              <div>
-                <button
-                  id="2"
-                  onClick={clickMe2 ? handleClick : console.log("no")}
-                  className="bridgeTile"
-                >
-                  {clickMe2 ? "Click one Of Us" : ""}
-                  {picked2 && (
-                    <div className="display-1">
-                      <FontAwesomeIcon icon={solid("skull-crossbones")} />
-                    </div>
-                  )}
-                </button>
-              </div>
-              {/* button 4 */}
-              <div>
-                <button
-                  id="4"
-                  onClick={clickMe4 ? handleClick : console.log("no")}
-                  className="bridgeTile"
-                >
-                  {clickMe4 ? "Click one Of Us" : ""}
-                  {picked4 && (
-                    <div className="display-1">
-                      <FontAwesomeIcon icon={solid("skull-crossbones")} />
-                    </div>
-                  )}
-                </button>
-              </div>
-              {/* button 6 */}
-              <div>
-                <button
-                  id="6"
-                  onClick={clickMe6 ? handleClick : console.log("no")}
-                  className="bridgeTile"
-                  style={
-                    picked6
-                      ? { backgroundColor: "#ed1b76" }
-                      : { backgroundColor: "#grey" }
-                  }
-                >
-                  {clickMe6 ? "Click one Of Us" : ""}
-                  {picked6 && (
-                    <div className="display-1">
-                      <FontAwesomeIcon icon={solid("shoe-prints")} />
-                    </div>
-                  )}
-                </button>
-              </div>
-              {/* button 8 */}
-              <div>
-                <button
-                  id="8"
-                  onClick={clickMe8 ? handleClick : console.log("no")}
-                  className="bridgeTile"
-                  style={
-                    picked8
-                      ? { backgroundColor: "#ed1b76" }
-                      : { backgroundColor: "#grey" }
-                  }
-                >
-                  {clickMe8 ? "Click one Of Us" : ""}
-                  {picked7 && (
-                    <div className="display-1">
-                      <FontAwesomeIcon icon={solid("skull-crossbones")} />
-                    </div>
-                  )}
-                </button>
-              </div>
-            </div>
           </div>
         </div>
       )}

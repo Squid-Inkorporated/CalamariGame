@@ -1,8 +1,27 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 import TugOfWar from "../assets/tug-of-war.png"
 import { motion } from "framer-motion"
 
 const HowToPlay = ({ gameName }) => {
+  const [timer, setTimer] = useState(5000)
+  const [color, setColor] = useState("green")
+  useEffect(() => {
+    const myInterval = () => {
+      if (timer === 1500) setColor("yellow")
+      if (timer === 1000) setColor("red")
+      if (timer > 0) {
+        setTimer((state) => state - 500)
+      } else {
+        setTimer(5000)
+        setColor("green")
+        clearInterval(interval)
+      }
+    }
+    const interval = setInterval(myInterval, 500)
+    return () => {
+      clearInterval(interval)
+    }
+  }, [timer])
   return (
     <div>
       <div className="row justify-content-center mx-1">
@@ -12,14 +31,9 @@ const HowToPlay = ({ gameName }) => {
               <div className="card-title">
                 <h3>How to play</h3>
               </div>
-              {gameName === "Trivia" && (
-                <p className="mb-0">
-                  Select the right answer from multiple options. You have 15
-                  seconds to choose and
-                  <span className="text-danger"> possibly</span> live!
-                </p>
-              )}
-              {gameName === "Trivia 2" && (
+              {(gameName === "Trivia" ||
+                gameName === "Trivia 2" ||
+                gameName === "Trivia 3") && (
                 <p className="mb-0">
                   Select the right answer from multiple options. You have 15
                   seconds to choose and
@@ -70,14 +84,25 @@ const HowToPlay = ({ gameName }) => {
                 </div>
               )}
               {gameName === "Red Light, Green Light" && (
-                <p className="mb-0">
-                  Run for your life! Tap the button and reach 50 within 15
-                  seconds. The light will change from{" "}
-                  <span style={{ color: "green" }}>green</span> to{" "}
-                  <span style={{ color: "yellow" }}>yellow</span> to{" "}
-                  <span style={{ color: "red" }}>red</span>. Do NOT run on a red
-                  light!
-                </p>
+                <div className="d-flex">
+                  <p className="mb-0">
+                    Run for your life! Tap the button and reach 25 within 15
+                    seconds. The light will change from{" "}
+                    <span style={{ color: "green" }}>green</span> to{" "}
+                    <span style={{ color: "yellow" }}>yellow</span> to{" "}
+                    <span style={{ color: "red" }}>red</span>. Do NOT run on a
+                    red light!
+                  </p>
+                  <div
+                    style={{
+                      width: "20vw",
+                      height: "20vw",
+                      backgroundColor: `${color}`,
+                      border: "4px solid white",
+                    }}
+                    className="col-auto rounded-circle"
+                  ></div>
+                </div>
               )}
               {gameName === "Glass Bridge" && (
                 <p className="mb-0">

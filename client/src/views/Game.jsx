@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react"
 import Trivia from "../components/GameComponents/Trivia"
 import Trivia2 from "../components/GameComponents/Trivia2"
+import Trivia3 from "../components/GameComponents/Trivia3"
 import RedLightGreenLight from "../components/GameComponents/RedLightGreenLight"
 import TugOfWar from "../components/GameComponents/TugOfWar"
 import Marbles from "../components/GameComponents/Marbles"
@@ -44,6 +45,9 @@ const Game = ({ socket, gameName, team }) => {
       )}
       {gameName === "Trivia 2" && (
         <Trivia2 setAnswer={setAnswer} answer={answer} />
+      )}
+      {gameName === "Trivia 3" && (
+        <Trivia3 setAnswer={setAnswer} answer={answer} />
       )}
       {gameName === "Red Light, Green Light" && (
         <RedLightGreenLight setAnswer={setAnswer} />

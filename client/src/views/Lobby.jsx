@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 import CalamariShapes from "../components/CalamariShapes"
 import HowToPlay from "../components/HowToPlay"
 
@@ -12,6 +12,25 @@ const Lobby = ({
   gameName,
   playerName,
 }) => {
+  const [timer, setTimer] = useState(30000)
+  useEffect(() => {
+    const myInterval = () => {
+      if (timer > 1000) {
+        setTimer((state) => state - 1000)
+      } else if (timer !== 0) {
+        setTimer(0)
+        if (gameName !== "Red Light, Green Light") {
+          socket.emit("start-round")
+        }
+        clearInterval(interval)
+      }
+    }
+    const interval = setInterval(myInterval, 1000)
+    return () => {
+      clearInterval(interval)
+    }
+  }, [timer])
+
   const handleClick = () => {
     socket.emit("start-round")
   }
@@ -56,18 +75,25 @@ const Lobby = ({
         style={{ bottom: "10rem" }}
         className="position-absolute start-50 translate-middle-x"
       >
-        {playerId === hostId ? (
-          <button className="btn" onClick={handleClick}>
-            Start
-          </button>
-        ) : (
-          <p className="mt-3">Waiting for host to start the game...</p>
-        )}
+        {gameName === "Red Light, Green Light" &&
+          (playerId === hostId ? (
+            <button className="btn" onClick={handleClick}>
+              Start
+            </button>
+          ) : (
+            <p className="mt-3">Waiting for host to start the game...</p>
+          ))}
       </div>
       <h1 className="readable position-absolute bottom-0 start-50 translate-middle-x">
         Room: {roomId}
       </h1>
       <CalamariShapes />
+      <div
+        style={{ bottom: "10%" }}
+        className="display-1 position-absolute start-50 translate-middle-x pb-5"
+      >
+        {gameName !== "Red Light, Green Light" && timer.toString().slice(0, -3)}
+      </div>
     </div>
   )
 }
